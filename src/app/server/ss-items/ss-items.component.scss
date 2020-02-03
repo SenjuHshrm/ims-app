@@ -1,0 +1,25 @@
+.table-con {
+  width: 100%;
+  overflow: auto;
+}
+th {
+  background: #388E3C;
+  color: #FAFAFA;
+  font-size: 12px;
+  border: 1px solid #E0E0E0;
+}
+td {
+  font-size: 12px;
+  text-align: center;
+  border: 1px solid #E0E0E0;
+}
+tr {
+  &:nth-child(even) {
+    background-color: #E8F2E9;
+  }
+}
+
+.mat-cell,
+.mat-header-cell {
+  text-align: center;
+}

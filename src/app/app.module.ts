@@ -21,7 +21,8 @@ import {
   MatSidenavModule,
   MatIconModule,
   MatListModule,
-  MatCardModule } from '@angular/material';
+  MatCardModule,
+  MatPaginatorModule } from '@angular/material';
 import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
 import { AuthService } from './services/auth.service'
 
@@ -39,6 +40,8 @@ import { SsItemsComponent } from './server/ss-items/ss-items.component';
 import { SsSalesReportComponent } from './server/ss-sales-report/ss-sales-report.component';
 import { SsAddAcctComponent } from './server/ss-add-acct/ss-add-acct.component';
 import { UpdateAcctInfoComponent } from './server/update-acct-info/update-acct-info.component';
+import { AddItemComponent } from './server/ss-items/add-item/add-item.component';
+import { ImageDataPipe } from './pipes/image-data.pipe';
 
 
 @NgModule({
@@ -54,7 +57,9 @@ import { UpdateAcctInfoComponent } from './server/update-acct-info/update-acct-i
     SsItemsComponent,
     SsSalesReportComponent,
     SsAddAcctComponent,
-    UpdateAcctInfoComponent
+    UpdateAcctInfoComponent,
+    AddItemComponent,
+    ImageDataPipe
   ],
   imports: [
     ReactiveFormsModule,
@@ -80,11 +85,15 @@ import { UpdateAcctInfoComponent } from './server/update-acct-info/update-acct-i
     MatIconModule,
     MatListModule,
     MatCardModule,
-    LayoutModule
+    LayoutModule,
+    MatPaginatorModule
   ],
   providers: [
     CanActivateRouteGuard,
     AuthService
+  ],
+  entryComponents: [
+    AddItemComponent
   ],
   bootstrap: [AppComponent]
 })

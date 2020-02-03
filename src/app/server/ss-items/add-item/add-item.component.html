@@ -1,0 +1,77 @@
+<h2>Add Item</h2>
+<div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='10px'>
+  <div class='item item-1' fxFlex='100%'>
+    <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='10px'>
+      <div class='item item-1' fxFlex='100%'>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+          <mat-form-field class='item item-1' fxFlex='50%'>
+            <mat-label>Select Product</mat-label>
+            <mat-select [(ngModel)]='itemInf.prod' name='category'>
+              <mat-option *ngFor='let prod of products' [value]='prod.value' (click)="changeSubCatVal(itemInf)">{{ prod.viewVal }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class='item item-2' fxFlex='50%'>
+            <mat-label>Select category</mat-label>
+            <mat-select [(ngModel)]='itemInf.cat' name='category'>
+              <mat-option *ngFor='let sc of subCat' [value]='sc.value'>{{ sc.viewVal }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class='item item-2' fxFlex='100%'>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+          <mat-form-field class='item item-1' fxFlex='50%'>
+            <mat-label>Name</mat-label>
+            <input matInput type='text' [(ngModel)]='itemInf.name' name='name'>
+          </mat-form-field>
+          <mat-form-field class='item item-2' fxFlex='50%'>
+            <mat-label>Color</mat-label>
+            <input matInput type='text' [(ngModel)]='itemInf.color' name='color'>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class='item item-3' fxFlex='100%'>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+          <mat-form-field class='item item-1' fxFlex='30%'>
+            <mat-label>Item count</mat-label>
+            <input matInput type='number' [(ngModel)]='itemInf.itemCount' name='itemCount'>
+          </mat-form-field>
+          <mat-form-field class='item item-2' fxFlex='30%'>
+            <mat-label>Price</mat-label>
+            <span matPrefix>₱&nbsp;</span>
+            <input matInput type='text' [(ngModel)]='itemInf.price' name='price'>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class='item item-4' fxFlex='100%'>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+          <mat-form-field class='item item-1' fxFlex='100%'>
+            <mat-label>Description</mat-label>
+            <textarea matInput type='text' [(ngModel)]='itemInf.desc' name='desc' rows='7'></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class='item item-5' fxFlex='100%'>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+          <div class='item item-1' fxFlex='30%'>
+            <img [src]='imgSrc' *ngIf='isImgChosen' alt='upload image' width='100%' height='100%'>
+          </div>
+        </div>
+      </div>
+      <div class='item item-6' fxFlex='100%'>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+          <div class='item item-1' fxFlex='30%'>
+            <input style='display: none' type='file' #fileInput (change)='fileChange($event)'>
+            <button mat-raised-button (click)='fileInput.click()'>Select image file</button>
+          </div>
+        </div>
+      </div>
+      <div class='item item-7' fxFlex='100%'>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap='20px'>
+          <button class='item item-1' fxFlex='40%' mat-raised-button color='primary' (click)='add(itemInf)'><mat-icon>add</mat-icon>&nbsp;Add</button>
+          <button class='item item-2' fxFlex='40%' mat-raised-button color='warn' (click)='close()'><mat-icon>cancel</mat-icon>&nbsp;Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

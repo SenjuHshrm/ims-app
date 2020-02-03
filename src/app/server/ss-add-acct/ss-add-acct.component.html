@@ -1,3 +1,62 @@
-<p>
-  ss-add-acct works!
-</p>
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' style='margin-top: 30px'>
+  <div class='item item-1' fxFlex='5%'></div>
+  <div class='item item-2' fxFlex='90%'>
+    <mat-card fxFlex='100%'>
+      <form (ngSubmit)='add(acctInfo, $event)'>
+        <mat-card-header>
+          <mat-card-title>Add Account</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center'>
+            <div class='item item-1' fxFlex='100%'>
+              <div class='container' fxLayout fxLayout.xs='row' fxLayoutAlign='center' fxLayoutGap='20px'>
+                <mat-form-field class='item item-1' fxFlex='30%'>
+                  <mat-label>Username</mat-label>
+                  <input matInput type='text' [(ngModel)]='acctInfo.username' name='username'>
+                </mat-form-field>
+                <mat-form-field class='item item-2' fxFlex='30%'>
+                  <mat-label>Password</mat-label>
+                  <input matInput type='password' [(ngModel)]='acctInfo.password' name='password'>
+                </mat-form-field>
+                <mat-form-field class='item item-3' fxFlex='30%'>
+                  <mat-label>Confirm Password</mat-label>
+                  <input matInput type='password' [(ngModel)]='acctInfo.cpass' name='cpass'>
+                </mat-form-field>
+              </div>
+              <hr>
+              <div class='container' fxLayout fxLayout.xs='row' fxLayoutAlign='center' fxLayoutGap='20px'>
+                <mat-form-field class='item item-1' fxFlex='30%'>
+                  <mat-label>First Name</mat-label>
+                  <input matInput type='text' [(ngModel)]='acctInfo.fName' name='fName'>
+                </mat-form-field>
+                <mat-form-field class='item item-2' fxFlex='30%'>
+                  <mat-label>Middle Name</mat-label>
+                  <input matInput type='text' [(ngModel)]='acctInfo.mName' name='mName'>
+                </mat-form-field>
+                <mat-form-field class='item item-3' fxFlex='30%'>
+                  <mat-label>Last Name</mat-label>
+                  <input matInput type='text' [(ngModel)]='acctInfo.lName' name='lName'>
+                </mat-form-field>
+              </div>
+              <div class='container' fxLayout fxLayout.xs='row' fxLayoutAlign='center' fxLayoutGap='20px'>
+                <mat-form-field class='item item-1' fxFlex='62%'>
+                  <mat-label>Address</mat-label>
+                  <input matInput type='text' [(ngModel)]='acctInfo.addr' name='addr'>
+                </mat-form-field>
+                <mat-form-field class='item item-2' fxFlex='30%'>
+                  <mat-label>Contact</mat-label>
+                  <input matInput type='text' [(ngModel)]='acctInfo.contact' name='contact'>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions fxLayout fxLayoutAlign='center'>
+          <button mat-raised-button type='submit' class='item item-1' fxFlex='30%' color='primary'>Add user</button>
+          <button mat-raised-button type='button' class='item item-2' fxFlex='30%' color='warn' (click)='resetForm()'>Reset form</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+  <div class='item item-3' fxFlex='5%'></div>
+</div>

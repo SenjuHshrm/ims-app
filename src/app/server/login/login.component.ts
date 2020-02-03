@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { LoginService } from '../../services/login.service';
+import { Router } from '@angular/router';
 import * as jwtDecode from 'jwt-decode';
 
 @Component({
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private sBar: MatSnackBar,
-    private authUser: LoginService
+    private authUser: LoginService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -50,7 +52,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('gpAdmin', res.res)
             let token: any = jwtDecode(res.res)
             let route = '/user/' + token.username;
-            window.location.href = route
+            this.router.navigate([route])
         }
       })
     }

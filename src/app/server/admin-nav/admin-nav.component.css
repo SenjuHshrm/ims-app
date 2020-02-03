@@ -3,7 +3,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 250px;
 }
 
 .sidenav .mat-toolbar {
@@ -14,4 +14,14 @@
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.accName {
+  font-size: 15px;
+}
+
+.centerTxt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

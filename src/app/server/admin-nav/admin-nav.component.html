@@ -3,13 +3,19 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
-    <mat-toolbar>Menu</mat-toolbar>
+      <mat-toolbar class='centerTxt'>
+        <p>Green Planet</p>
+      </mat-toolbar>
+      <mat-toolbar class='centerTxt'>
+        <p class='accName'>{{ acctName }}</p>
+      </mat-toolbar>
     <mat-nav-list>
       <!-- <a mat-list-item routerLink="#">Link 1</a>
       <a mat-list-item routerLink="#">Link 2</a>
       <a mat-list-item routerLink="#">Link 3</a> -->
-      <a mat-list-item *ngFor='let ls of navLs' routerLink='{{ ls.path }}'>{{ ls.name }}</a>
-      <a mat-list-item (click)='logOut()'>Logout</a>
+      <a mat-list-item *ngFor='let ls of navLs' routerLink='{{ ls.path }}'><mat-icon>{{ ls.ic }}</mat-icon>&nbsp;&nbsp;{{ ls.name }}</a>
+      <a mat-list-item *ngIf='checkAcctType()' routerLink='add-acct'><mat-icon>person_add</mat-icon>&nbsp;&nbsp;Add Account</a>
+      <a mat-list-item (click)='logOut()'><mat-icon>power_settings_new</mat-icon>&nbsp;&nbsp;Logout</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,7 +28,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>ims-app</span>
+      <span>Inventory Management System</span>
     </mat-toolbar>
     <router-outlet>
 

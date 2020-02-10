@@ -5,16 +5,26 @@ import { SsAdminlayoutComponent } from './server/ss-adminlayout/ss-adminlayout.c
 import { SsPanelLayoutComponent } from './server/ss-panel-layout/ss-panel-layout.component';
 import { SsHomeComponent } from './server/ss-home/ss-home.component';
 import { SsItemsComponent } from './server/ss-items/ss-items.component';
+import { SsDailySalesComponent } from './server/ss-daily-sales/ss-daily-sales.component';
 import { SsSalesReportComponent } from './server/ss-sales-report/ss-sales-report.component';
 import { SsAddAcctComponent } from './server/ss-add-acct/ss-add-acct.component';
 import { CsHomeComponent } from './client/cs-home/cs-home.component';
+import { CsProductsComponent } from './client/cs-products/cs-products.component';
+import { CsServicesComponent } from './client/cs-services/cs-services.component';
+import { CsSiteLayoutComponent } from './client/cs-site-layout/cs-site-layout.component';
 import { UpdateAcctInfoComponent } from './server/update-acct-info/update-acct-info.component'
 import { NotFoundComponent } from './response-code/not-found/not-found.component';
 
 import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
 
 const routes: Routes = [
-  { path: '', component: CsHomeComponent },
+  { path: '', component: CsSiteLayoutComponent,
+    children: [
+      { path: '', component: CsHomeComponent },
+      { path: 'products', component: CsProductsComponent },
+      { path: 'services', component: CsServicesComponent }
+    ]
+ },
   { path: 'admin-login', component: SsAdminlayoutComponent,
     children: [
     { path: '', component: LoginComponent }
@@ -23,6 +33,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'items', pathMatch: 'full', canActivate: [CanActivateRouteGuard] },
       { path: 'items', component: SsItemsComponent, canActivate: [CanActivateRouteGuard] },
+      { path: 'sales', component: SsDailySalesComponent, canActivate: [CanActivateRouteGuard] },
       { path: 'report', component: SsSalesReportComponent, canActivate: [CanActivateRouteGuard] },
       { path: 'add-acct', component: SsAddAcctComponent, canActivate: [CanActivateRouteGuard] },
       { path: 'acct-setting', component: UpdateAcctInfoComponent, canActivate: [CanActivateRouteGuard]}

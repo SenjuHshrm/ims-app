@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { MatSidenav } from '@angular/material'
 import { Observable } from 'rxjs';
 import * as jwtDecode from 'jwt-decode';
-import { map } from 'rxjs/operators';
+import { map, filter, withLatestFrom } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-nav',
@@ -11,10 +12,11 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./admin-nav.component.css']
 })
 export class AdminNavComponent implements OnInit{
-
+  @ViewChild('drawer') drawer: MatSidenav
   public navLs: any = [
     { path: 'items', name: 'Items', ic: 'storage' },
-    { path: 'report', name: 'Sales report', ic: 'trending_up' },
+    { path: 'sales', name: 'Daily Sales', ic: 'trending_up' },
+    { path: 'report', name: 'Sales report', ic: 'poll' },
     { path: 'acct-setting', name: 'Update Account', ic: 'person_outline' }
   ]
   public acctName: string;
@@ -24,7 +26,12 @@ export class AdminNavComponent implements OnInit{
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+    router.events.pipe(
+      withLatestFrom(this.isHandset$),
+      filter(([a, b]) => b && a instanceof NavigationEnd)
+    ).subscribe(_ => this.drawer.close())
+  }
 
   loggedIn() {
     return (localStorage.getItem('gpAdmin')) ? true : false;

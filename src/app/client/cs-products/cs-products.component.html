@@ -1,0 +1,49 @@
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-top: 30px'>
+  <div class='item item-1' fxFlex='5%'></div>
+  <div class='item item-2' fxFlex='90%'>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Search for products</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='center' fxLayoutGap='20px'>
+          <div class='item item-1' fxFlex='100%'>
+            <div class='container' fxLayout fxLayout.xs='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+              <mat-form-field class='item item-1' fxFlex='30%'>
+                <mat-label>Select Product</mat-label>
+                <mat-select [(ngModel)]='searchParam.prod' name='category'>
+                  <mat-option *ngFor='let prod of products' [value]='prod.value' (click)="changeSubCatVal(searchParam)">{{ prod.viewVal }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class='item item-2' fxFlex='30%'>
+                <mat-label>Select category</mat-label>
+                <mat-select [(ngModel)]='searchParam.cat' name='category'>
+                  <mat-option *ngFor='let sc of subCat' [value]='sc.value'>{{ sc.viewVal }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-raised-button type='button' class='item item-3' fxFlex='30%' color='primary' (click)='search($event, searchParam)'><mat-icon>search</mat-icon>Search</button>
+            </div>
+          </div>
+          <div class='item item-2' fxFlex='100%'>
+            <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
+              <ul class='item item-1' fxFLex='100%' *ngIf='searchRes'>
+                <div class='container' fxLayout fxLayout.xs='column' fxLayout.md='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+                  <li class='item item-1 viewBtn' fxFlex='25%' *ngFor='let item of searchRes' (click)='viewProd(item._id)'>
+                    <img [src]='"data:image/png;jpg;jpeg;base64, " + item.img | imageData' width='70px' height='70px'>
+                    <p>
+                      {{ item.name }}
+                      <br>
+                      <span>({{ ((item.isAvailable) ? 'In store' : 'Not available') }})</span><br>
+                      <span>{{ ('₱ ') + item.price }}</span>
+                    </p>
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class='item item-3' fxFlex='5%'></div>
+</div>

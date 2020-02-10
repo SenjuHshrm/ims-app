@@ -25,3 +25,12 @@
   align-items: center;
   justify-content: center;
 }
+
+img {
+  width: 130px;
+  height: 130px;
+}
+
+.navImg {
+  margin-top: 10px
+}

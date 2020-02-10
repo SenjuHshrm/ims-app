@@ -40,8 +40,15 @@ import { SsItemsComponent } from './server/ss-items/ss-items.component';
 import { SsSalesReportComponent } from './server/ss-sales-report/ss-sales-report.component';
 import { SsAddAcctComponent } from './server/ss-add-acct/ss-add-acct.component';
 import { UpdateAcctInfoComponent } from './server/update-acct-info/update-acct-info.component';
-import { AddItemComponent } from './server/ss-items/add-item/add-item.component';
+import { ItemComponent } from './server/ss-items/item/item.component';
 import { ImageDataPipe } from './pipes/image-data.pipe';
+import { SsDailySalesComponent } from './server/ss-daily-sales/ss-daily-sales.component';
+import { GenerateReportComponent } from './server/ss-sales-report/generate-report/generate-report.component';
+import { CsSiteLayoutComponent } from './client/cs-site-layout/cs-site-layout.component';
+import { CsProductsComponent } from './client/cs-products/cs-products.component';
+import { CsServicesComponent } from './client/cs-services/cs-services.component';
+import { CsNavComponent } from './client/cs-nav/cs-nav.component';
+import { ViewProdComponent } from './client/cs-products/view-prod/view-prod.component';
 
 
 @NgModule({
@@ -58,8 +65,15 @@ import { ImageDataPipe } from './pipes/image-data.pipe';
     SsSalesReportComponent,
     SsAddAcctComponent,
     UpdateAcctInfoComponent,
-    AddItemComponent,
-    ImageDataPipe
+    ItemComponent,
+    ImageDataPipe,
+    SsDailySalesComponent,
+    GenerateReportComponent,
+    CsSiteLayoutComponent,
+    CsProductsComponent,
+    CsServicesComponent,
+    CsNavComponent,
+    ViewProdComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -93,7 +107,9 @@ import { ImageDataPipe } from './pipes/image-data.pipe';
     AuthService
   ],
   entryComponents: [
-    AddItemComponent
+    ItemComponent,
+    GenerateReportComponent,
+    ViewProdComponent
   ],
   bootstrap: [AppComponent]
 })

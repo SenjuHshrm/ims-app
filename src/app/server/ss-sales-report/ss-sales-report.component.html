@@ -1,3 +1,36 @@
-<p>
-  ss-sales-report works!
-</p>
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' style='margin-top: 30px'>
+  <div class='item item-1' fxFlex='5%'></div>
+  <div class='item item-1' fxFlex='90%'>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Sales Report</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+          <mat-form-field class='item item-1' fxFlex='30%'>
+            <mat-label>Type of sale</mat-label>
+            <mat-select [(ngModel)]='inf.type' name='type'>
+              <mat-option *ngFor='let typ of salesOpts' [value]='typ.value'>{{ typ.viewVal }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class='item item-2' fxFlex='30%'>
+            <mat-label>Date from</mat-label>
+            <input matInput [matDatepicker]='dateFrom' name='dateFr' [(ngModel)]='inf.dateFrom'>
+            <mat-datepicker-toggle matSuffix [for]='dateFrom'></mat-datepicker-toggle>
+            <mat-datepicker #dateFrom touchUi></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class='item item-3' fxFlex='30%'>
+            <mat-label>Date to</mat-label>
+            <input matInput [matDatepicker]='dateTo' name='dateTo' [(ngModel)]='inf.dateTo'>
+            <mat-datepicker-toggle matSuffix [for]='dateTo'></mat-datepicker-toggle>
+            <mat-datepicker #dateTo touchUi></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+          <button mat-raised-button type='button' class='item item-1' fxFLex='30%' color='primary' (click)='genReport(inf)'><mat-icon>print</mat-icon>&nbsp;Generate report</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class='item item-1' fxFlex='5%'></div>
+</div>

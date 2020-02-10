@@ -1,4 +1,4 @@
-<h2>Add Item</h2>
+<h2>{{ title }}</h2>
 <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='10px'>
   <div class='item item-1' fxFlex='100%'>
     <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='10px'>
@@ -54,7 +54,7 @@
       <div class='item item-5' fxFlex='100%'>
         <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
           <div class='item item-1' fxFlex='30%'>
-            <img [src]='imgSrc' *ngIf='isImgChosen' alt='upload image' width='100%' height='100%'>
+            <img [src]='imgSrc | imageData' *ngIf='isImgChosen' alt='upload image' width='100%' height='100%'>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@
       </div>
       <div class='item item-7' fxFlex='100%'>
         <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap='20px'>
-          <button class='item item-1' fxFlex='40%' mat-raised-button color='primary' (click)='add(itemInf)'><mat-icon>add</mat-icon>&nbsp;Add</button>
+          <button class='item item-1' fxFlex='40%' mat-raised-button color='primary' (click)='add(itemInf)'><mat-icon>{{btnIc}}</mat-icon>&nbsp;{{btnLabel}}</button>
           <button class='item item-2' fxFlex='40%' mat-raised-button color='warn' (click)='close()'><mat-icon>cancel</mat-icon>&nbsp;Cancel</button>
         </div>
       </div>

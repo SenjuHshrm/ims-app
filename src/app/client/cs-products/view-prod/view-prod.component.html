@@ -1,0 +1,18 @@
+<h2>{{ info.name }}</h2>
+<span>{{ ((info.isAvailable) ? 'In store' : 'Not available') }}</span>
+<div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap='10px'>
+  <div class='item item-1' fxFlex='50%'>
+    <mat-card>
+      <mat-card-content>
+        <img [src]='info.img | imageData' width='100%' height='100%'>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class='item item-2' fxFlex='50%'>
+    <p>Color: {{ info.color }}</p>
+    <p>Price: {{ info.price }}</p>
+    <ul *ngIf='info.desc'>
+      <li *ngFor='let desc of info.desc'>{{ desc }}</li>
+    </ul>
+  </div>
+</div>

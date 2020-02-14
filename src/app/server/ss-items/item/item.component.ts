@@ -32,6 +32,11 @@ export class ItemComponent implements OnInit {
     private itmSvc: ItemsService,
     private cFrmt: CurrencyFormatService
   ) { }
+
+  checkType(): boolean {
+    return (this.data.act == 'add') ? false : true
+  }
+
   ngOnInit() {
     let token: any = jwtDecode(localStorage.getItem('gpAdmin'))
     console.log(this.data)

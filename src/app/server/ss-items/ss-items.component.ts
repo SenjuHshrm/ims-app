@@ -41,7 +41,6 @@ export class SsItemsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.itemsTable.paginator = this.paginator
     this.dfVl.getVal().subscribe(res => {
       this.defVals = res.res
     })
@@ -51,6 +50,7 @@ export class SsItemsComponent implements OnInit {
     }
     itemLs = []
     this.itemsTable = new MatTableDataSource(itemLs)
+    this.itemsTable.paginator = this.paginator
   }
 
   changeSubCatVal(obj: any) {
@@ -88,6 +88,7 @@ export class SsItemsComponent implements OnInit {
             availability: arr.isAvailable
           })
           this.itemsTable = new MatTableDataSource(itemLs)
+          this.itemsTable.paginator = this.paginator
         })
       } else {
         this.sBar.open('No products found', 'OK', {

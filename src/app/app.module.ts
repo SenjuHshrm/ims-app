@@ -49,6 +49,9 @@ import { CsProductsComponent } from './client/cs-products/cs-products.component'
 import { CsServicesComponent } from './client/cs-services/cs-services.component';
 import { CsNavComponent } from './client/cs-nav/cs-nav.component';
 import { ViewProdComponent } from './client/cs-products/view-prod/view-prod.component';
+import { DashboardComponent } from './server/dashboard/dashboard.component';
+import { SsAddSalesComponent } from './server/ss-add-sales/ss-add-sales.component';
+import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item.component';
 
 
 @NgModule({
@@ -73,7 +76,10 @@ import { ViewProdComponent } from './client/cs-products/view-prod/view-prod.comp
     CsProductsComponent,
     CsServicesComponent,
     CsNavComponent,
-    ViewProdComponent
+    ViewProdComponent,
+    DashboardComponent,
+    SsAddSalesComponent,
+    SsReceiveItemComponent
   ],
   imports: [
     ReactiveFormsModule,

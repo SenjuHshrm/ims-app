@@ -14,6 +14,7 @@ import { map, filter, withLatestFrom } from 'rxjs/operators';
 export class AdminNavComponent implements OnInit{
   @ViewChild('drawer') drawer: MatSidenav
   public navLs: any = [
+    { path: 'dashboard', name: 'Dashboard', ic: 'dashboard' },
     { path: 'items', name: 'Items', ic: 'storage' },
     { path: 'sales', name: 'Daily Sales', ic: 'trending_up' },
     { path: 'report', name: 'Sales report', ic: 'poll' },

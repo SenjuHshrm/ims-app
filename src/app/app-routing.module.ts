@@ -14,8 +14,10 @@ import { CsServicesComponent } from './client/cs-services/cs-services.component'
 import { CsSiteLayoutComponent } from './client/cs-site-layout/cs-site-layout.component';
 import { UpdateAcctInfoComponent } from './server/update-acct-info/update-acct-info.component'
 import { NotFoundComponent } from './response-code/not-found/not-found.component';
-
+import { DashboardComponent } from './server/dashboard/dashboard.component';
 import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
+import { SsAddSalesComponent } from './server/ss-add-sales/ss-add-sales.component';
+import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item.component';
 
 const routes: Routes = [
   { path: '', component: CsSiteLayoutComponent,
@@ -31,9 +33,12 @@ const routes: Routes = [
   ]},
   { path: 'user/:username', component: SsPanelLayoutComponent,
     children: [
-      { path: '', redirectTo: 'items', pathMatch: 'full', canActivate: [CanActivateRouteGuard] },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [CanActivateRouteGuard] },
+      { path: 'dashboard', component: DashboardComponent, canActivate: [CanActivateRouteGuard] },
       { path: 'items', component: SsItemsComponent, canActivate: [CanActivateRouteGuard] },
       { path: 'sales', component: SsDailySalesComponent, canActivate: [CanActivateRouteGuard] },
+      { path: 'sales/add', component: SsAddSalesComponent, canActivate: [CanActivateRouteGuard] },
+      { path: 'sales/receive', component: SsReceiveItemComponent, canActivate: [CanActivateRouteGuard] },
       { path: 'report', component: SsSalesReportComponent, canActivate: [CanActivateRouteGuard] },
       { path: 'add-acct', component: SsAddAcctComponent, canActivate: [CanActivateRouteGuard] },
       { path: 'acct-setting', component: UpdateAcctInfoComponent, canActivate: [CanActivateRouteGuard]}

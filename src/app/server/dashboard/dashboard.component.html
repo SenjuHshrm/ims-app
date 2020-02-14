@@ -1,0 +1,45 @@
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' style='margin-top: 30px'>
+  <div class='item item-1' fxFlex='5%'></div>
+  <div class='item item-2' fxFlex='90%'>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Dashboard</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout.sm='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
+          <div class='item item-1' fxFlex='50%'>
+            <div class='container' fxLayout fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
+              <div class='item item-1' fxFlex='50%'>
+                <canvas #inbChart style='width:50%; height:70%'></canvas>
+              </div>
+              <div class='item item-2' fxFlex='50%'>
+                <mat-form-field>
+                  <mat-label>Select received products</mat-label>
+                  <mat-select [(ngModel)]='iprod' name='iproduct'>
+                    <mat-option *ngFor='let prod of products' [value]='prod.value' (click)='changeInbound()'>{{ prod.viewVal }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class='item item-2' fxFlex='50%'>
+            <div class='container' fxLayout fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
+              <div class='item item-1' fxFlex='100%'>
+                <canvas #outbChart style='width:50%; height:70%'></canvas>
+              </div>
+              <div class='item item-2' fxFlex='50%'>
+                <mat-form-field>
+                  <mat-label>Select sold products</mat-label>
+                  <mat-select [(ngModel)]='oprod' name='oproduct'>
+                    <mat-option *ngFor='let prod of products' [value]='prod.value' (click)='changeOutbound()'>{{ prod.viewVal }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class='item item-3' fxFlex='5%'></div>
+</div>

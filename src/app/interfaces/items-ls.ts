@@ -7,4 +7,5 @@ export interface ItemsLs {
   price: string;
   itemCount: string;
   availability: boolean;
+  feature: boolean;
 }

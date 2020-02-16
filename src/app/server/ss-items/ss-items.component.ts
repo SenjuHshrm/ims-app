@@ -19,10 +19,15 @@ var itemLs: ItemsLs[] = []
   styleUrls: ['./ss-items.component.scss']
 })
 export class SsItemsComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   public itemsTable = new MatTableDataSource(itemLs)
   public itemsList: any;
   public searchParam: any;
   public defVals: any;
+  public subCat: SelectOpts[] = [];
+  public tableHeader: string[] = ['name', 'img', 'color', 'description' ,'price' ,'itemCount', 'availability', 'feature', 'action']
   public products: SelectOpts[] = [
     { value: 'Bikes', viewVal: 'Bikes' },
     { value: 'Accessories', viewVal: 'Accessories' },
@@ -30,9 +35,7 @@ export class SsItemsComponent implements OnInit {
     { value: 'Components', viewVal: 'Components' },
     { value: 'Workshop', viewVal: 'Workshop' }
   ]
-  public subCat: SelectOpts[] = [];
-  public tableHeader: string[] = ['name', 'img', 'color', 'description' ,'price' ,'itemCount', 'availability', 'action']
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(
     private dfVl: DefValService,
     private itm: ItemsService,
@@ -41,16 +44,33 @@ export class SsItemsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.dfVl.getVal().subscribe(res => {
-      this.defVals = res.res
-    })
+
     this.searchParam = {
       prod: '',
       cat: ''
     }
-    itemLs = []
-    this.itemsTable = new MatTableDataSource(itemLs)
-    this.itemsTable.paginator = this.paginator
+    this.dfVl.getVal().subscribe(res => {
+      this.defVals = res
+      this.itm.getAllProd().subscribe(res => {
+        itemLs = []
+        this.itemsList = res;
+        _.forEach(this.itemsList, (arr: any) => {
+          itemLs.push({
+            id: arr._id,
+            name: arr.name,
+            img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
+            color: arr.color,
+            description: arr.desc.join('<br>'),
+            price: '₱ ' + arr.price,
+            itemCount: arr.itemCount,
+            availability: arr.isAvailable,
+            feature: arr.featureToSite
+          })
+        })
+        this.itemsTable = new MatTableDataSource(itemLs)
+        this.itemsTable.paginator = this.paginator
+      })
+    })
   }
 
   changeSubCatVal(obj: any) {
@@ -71,12 +91,19 @@ export class SsItemsComponent implements OnInit {
 
   search(evt: MouseEvent, obj: any) {
     evt.defaultPrevented
-    let route = '/api/search-item/' + obj.prod + '/' + obj.cat.replace(/\//ig,'-');
-    this.itm.search(route).subscribe(res => {
-      this.itemsList = res.res
-      if(res.res.length > 0) {
-        itemLs = []
-        _.forEach(res.res, arr => {
+    let param: any;
+    if(obj.prod == '' && obj.cat == '') {
+      param = { }
+    } else if(obj.prod != '' && obj.cat == '') {
+      param = { product: obj.prod }
+    } else if(obj.prod != '' && obj.cat != '') {
+      param = { product: obj.prod, category: obj.cat }
+    }
+    this.itm.search(param).subscribe(res => {
+      itemLs = [];
+      this.itemsList = res
+      if(res.length > 0) {
+        _.forEach(res, arr => {
           itemLs.push({
             id: arr._id,
             name: arr.name,
@@ -85,16 +112,15 @@ export class SsItemsComponent implements OnInit {
             description: arr.desc.join('<br>'),
             price: '₱ ' + arr.price,
             itemCount: arr.itemCount,
-            availability: arr.isAvailable
+            availability: arr.isAvailable,
+            feature: arr.featureToSite
           })
-          this.itemsTable = new MatTableDataSource(itemLs)
-          this.itemsTable.paginator = this.paginator
         })
       } else {
-        this.sBar.open('No products found', 'OK', {
-          duration: 2000
-        })
+        this.sBar.open('No items found', 'OK', { duration: 2000 })
       }
+      this.itemsTable = new MatTableDataSource(itemLs)
+      this.itemsTable.paginator = this.paginator
     })
   }
 
@@ -112,43 +138,14 @@ export class SsItemsComponent implements OnInit {
     md.afterClosed().subscribe(res => {
       if(res != undefined) {
         let me = new MouseEvent('click')
-        this.searchParam.prod = res.prod;
-        this.changeSubCatVal(this.searchParam)
-        this.searchParam.cat = res.cat;
         this.search(me, this.searchParam)
       }
     })
   }
 
-  changeAvailability(row: any) {
-    let obj: any = _.find(this.itemsList, { name: row.name })
-    obj.isAvailable = row.availability
-    if(row.itemCount == 0) {
-      row.availability = false
-      this.sBar.open('Unable to check when item amount is zero (0)', 'OK', {
-        duration: 2000
-      })
-    } else {
-      this.itm.updateAvail(obj).subscribe(res => {
-        let msg = ''
-        if(res.res) {
-          if(row.availability) {
-            msg = 'Availability set to true'
-          } else {
-            msg = 'Availability set to false'
-          }
-        } else {
-          msg = 'An error occured'
-        }
-        this.sBar.open(msg, 'OK', {
-          duration: 2000
-        })
-      })
-    }
-  }
-
   updateItem(row: any) {
-    let obj = _.find(this.itemsList, { name: row.name })
+    console.log(this.itemsList)
+    let obj = _.find(this.itemsList, { _id: row.id })
     const md = this.mDlg.open(ItemComponent, {
       disableClose: true,
       data: {
@@ -162,10 +159,19 @@ export class SsItemsComponent implements OnInit {
     md.afterClosed().subscribe(res => {
       if(res != undefined) {
         let me = new MouseEvent('click')
-        this.searchParam.prod = res.prod;
-        this.changeSubCatVal(this.searchParam)
-        this.searchParam.cat = res.cat;
         this.search(me, this.searchParam)
+      }
+    })
+  }
+
+  toggleFeature(row: any) {
+    this.itm.updateFeature(row).subscribe(res => {
+      if(res.res) {
+        let me = new MouseEvent('click')
+        this.search(me, this.searchParam)
+      } else {
+        row.feature = false
+        this.sBar.open('Featured items limit is four (4)', 'OK', { duration: 2000 })
       }
     })
   }

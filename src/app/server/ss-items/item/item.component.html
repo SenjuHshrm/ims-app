@@ -32,11 +32,7 @@
       </div>
       <div class='item item-3' fxFlex='100%'>
         <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
-          <mat-form-field class='item item-1' fxFlex='30%'>
-            <mat-label>Item count</mat-label>
-            <input matInput type='number' [(ngModel)]='itemInf.itemCount' name='itemCount' [disabled]='checkType()'>
-          </mat-form-field>
-          <mat-form-field class='item item-2' fxFlex='30%'>
+          <mat-form-field class='item item-1' fxFlex='50%'>
             <mat-label>Price</mat-label>
             <span matPrefix>₱&nbsp;</span>
             <input matInput type='text' [(ngModel)]='itemInf.price' name='price'>

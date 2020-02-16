@@ -1,32 +1,41 @@
-<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-top: 30px'>
-  <div class='item item-1' fxFlex='5%'></div>
-  <div class='item item-2' fxFlex='45%' style='text-align: center'>
-    <img src='../assets/logo.png' width='300px' height='300px'>
+<div class='container first-col' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
+  <div class='item item-1' fxFlex='100%'></div>
+  <div class='item item-2' fxFlex='100%'>
+    <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+      <div class='' fxFlex='10%'></div>
+      <div class='item item-2' fxFlex='30%'>
+        <div class='quote-container'>
+          <h1>Get active,</h1>
+          <h1>keep your balance,</h1>
+          <h1>move forward</h1>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class='item item-3' fxFlex='45%'>
+</div>
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px'>
+  <div class='item item-1' fxFlex='100%'>
+    <p class='indent'>
+      Lorem ipsum dolor sit amet, inermis platonem qualisque ex pro, unum cetero sanctus vel no. Postea ceteros quo id. Debet alienum lucilius usu ei. Mei ei suas elitr incorrupte, eos at summo saepe, te accusata posidonium sea. Te eos elit probatus interpretaris, vidisse minimum quaestio ei has.
+      Sed scripta aliquid ea, id mnesarchum efficiantur comprehensam ius. Suscipit intellegam vix no, ius vocent lobortis an. Eos ad aeque ludus hendrerit. Sale falli nostrum mea an, decore persius scripserit vim ad.
+    </p>
+  </div>
+</div>
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px'>
+  <div class='item item-1' fxFlex='100%'>
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Information</mat-card-title>
+        <mat-card-title>Featured Products</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p class='indent'>
-          Lorem ipsum dolor sit amet, inermis platonem qualisque ex pro, unum cetero sanctus vel no. Postea ceteros quo id. Debet alienum lucilius usu ei. Mei ei suas elitr incorrupte, eos at summo saepe, te accusata posidonium sea. Te eos elit probatus interpretaris, vidisse minimum quaestio ei has.
-          Sed scripta aliquid ea, id mnesarchum efficiantur comprehensam ius. Suscipit intellegam vix no, ius vocent lobortis an. Eos ad aeque ludus hendrerit. Sale falli nostrum mea an, decore persius scripserit vim ad.
-        </p>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='center center' fxLayoutGap='20px' *ngIf='featProd'>
+          <div class='item item-1' fxFlex='25%' *ngFor='let itm of featProd' style='text-align: center'>
+            <img class='click' [src]='"data:image/png;jpg;jpeg;base64, " + itm.img | imageData' width='100px' height='100px' (click)='viewImg(itm.img)'>
+            <p>{{ itm.name }}</p>
+            <p>{{ ('₱ ') + itm.price }}</p>
+          </div>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
-  <div class='item item-4' fxFlex='5%'></div>
-</div>
-<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-top: 30px'>
-  <div class='item item-1' fxFlex='5%'></div>
-  <div class='item item-2' fxFlex='90%'>
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Home</mat-card-title>
-      </mat-card-header>
-      <mat-card-content></mat-card-content>
-    </mat-card>
-  </div>
-  <div class='item item-3' fxFlex='5%'></div>
 </div>

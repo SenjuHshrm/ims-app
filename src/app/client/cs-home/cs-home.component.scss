@@ -1,0 +1,24 @@
+.first-col {
+  margin-top: 7px;
+  background: #ffffff url("/assets/mtb7.jpg") no-repeat center;
+  height: 700px;
+  width: 100%;
+  background-size: cover;
+}
+
+.quote-container {
+  background: rgba(0, 0, 0, 0.57);
+  color: #fff;
+  padding: 0.5em;
+}
+
+.feat-bg {
+  background: rgba(0, 0, 0, 0.20);
+}
+
+.click {
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(#7AB37D, 0.6);
+  }
+}

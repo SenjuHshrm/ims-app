@@ -72,7 +72,8 @@ export class SsReceiveItemComponent implements OnInit {
           description: arr.desc.join('<br>'),
           price: '₱ ' + arr.price,
           itemCount: arr.itemCount,
-          availability: arr.isAvailable
+          availability: arr.isAvailable,
+          feature:  arr.featureToSite
         })
       })
       this.itemsLs = new MatTableDataSource(itemLs)

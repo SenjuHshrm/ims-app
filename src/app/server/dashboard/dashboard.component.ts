@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SelectOpts } from '../../interfaces/select-opts';
-import { GenerateReportService } from '../../services/generate-report.service';DefValService
+import { GenerateReportService } from '../../services/generate-report.service';
+import { CurrencyFormatService } from '../../services/currency-format.service';
 import { DefValService } from '../../services/def-val.service';
 import { Chart } from 'chart.js';
 import * as _ from 'lodash';
@@ -13,6 +14,7 @@ import * as moment from 'moment';
 })
 export class DashboardComponent implements OnInit {
 
+  public monthIncome: any;
   public products: SelectOpts[] = [
     { value: 'Bikes', viewVal: 'Bikes' },
     { value: 'Accessories', viewVal: 'Accessories' },
@@ -22,28 +24,35 @@ export class DashboardComponent implements OnInit {
   ]
   @ViewChild('inbChart') inbChart: ElementRef;
   @ViewChild('outbChart') outbChart: ElementRef;
+  @ViewChild('income') income: ElementRef;
   public vals: any;
   public logs: any;
   public iprod: string;
   public oprod: string;
   public recChart: any;
   public soldChart: any;
+  public mnIncm: any
 
   constructor(
     private defVals: DefValService,
-    private log: GenerateReportService
+    private log: GenerateReportService,
+    private crrForm: CurrencyFormatService
   ) { }
 
   ngOnInit() {
     this.iprod = 'Bikes';
     this.oprod = 'Bikes';
     this.defVals.getVal().subscribe(res => {
-      this.vals = res.res
+      this.vals = res
       this.log.getLogs().subscribe(res => {
         this.logs = res;
         this.initInbound()
         this.initOutbound()
       })
+    })
+    this.log.getMonthlyIncome().subscribe(res => {
+      this.monthIncome = res
+      this.initMonthIncome()
     })
   }
 
@@ -121,7 +130,7 @@ export class DashboardComponent implements OnInit {
     for(let i = 0; i < labelsLs.length; i++) {
       let recv = 0;
       _.forEach(this.logs, arr => {
-        if(arr.type == 'in' && arr.prod == this.oprod && arr.cat == labelsLs[i]) {
+        if(arr.type == 'out' && arr.prod == this.oprod && arr.cat == labelsLs[i]) {
           if(arr.createdAt >= startDate && arr.createdAt <= endDate) {
             recv = recv + arr.sold
           }
@@ -161,7 +170,7 @@ export class DashboardComponent implements OnInit {
         }
       }
     })
-    this.recChart.render()
+    this.soldChart.render()
   }
 
   changeInbound() {
@@ -208,6 +217,56 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  initMonthIncome() {
+    //#388e3c
+    let labelsLs: string[] = []
+    let amt = [], bgColor = [], brdr = []
+    Object.keys(this.monthIncome).forEach(key => {
+      labelsLs.push(key)
+      amt.push(this.monthIncome[key])
+      bgColor.push('#388E3C33')
+      brdr.push('#388E3CFF')
+    })
+    this.mnIncm = new Chart(this.income.nativeElement, {
+      type: 'line',
+      data: {
+        labels: labelsLs,
+        datasets: [{
+          backgroundColor: '#FFFFFF00',
+          data: amt,
+          borderColor: '#388E3CFF',
+          borderWidth: 1,
+          lineTension: 0
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Annual Income',
+          position: 'bottom'
+        },
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
+        tooltips: {
+          callbacks: {
+            label: (tooltipItem, data) => {
+              let lbl = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]
+              return '₱ ' + (this.crrForm.numComma((lbl).toFixed(2))).toString()
+            }
+          }
+        }
+      }
+    })
+  }
+
   changeOutbound() {
     if(this.soldChart) {
       this.soldChart.data.labels = []
@@ -231,7 +290,7 @@ export class DashboardComponent implements OnInit {
       for(let i = 0; i < labelsLs.length; i++) {
         let recv = 0;
         _.forEach(this.logs, arr => {
-          if(arr.type == 'in' && arr.prod == this.oprod && arr.cat == labelsLs[i]) {
+          if(arr.type == 'out' && arr.prod == this.oprod && arr.cat == labelsLs[i]) {
             if(arr.createdAt >= startDate && arr.createdAt <= endDate) {
               recv = recv + arr.sold
             }

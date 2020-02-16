@@ -60,7 +60,11 @@
                   </ng-container>
                   <ng-container matColumnDef='availability'>
                     <th mat-header-cell *matHeaderCellDef>Availability</th>
-                    <td mat-cell *matCellDef='let data'><mat-checkbox [(ngModel)]='data.availability' (change)="changeAvailability(data)" disabled></mat-checkbox></td>
+                    <td mat-cell *matCellDef='let data'><mat-checkbox [(ngModel)]='data.availability' disabled></mat-checkbox></td>
+                  </ng-container>
+                  <ng-container matColumnDef='feature'>
+                    <th mat-header-cell *matHeaderCellDef>Feature to Site</th>
+                    <td mat-cell *matCellDef='let data'><mat-checkbox [(ngModel)]='data.feature' (change)="toggleFeature(data)"></mat-checkbox></td>
                   </ng-container>
                   <ng-container matColumnDef='action'>
                     <th mat-header-cell *matHeaderCellDef>Update Item</th>

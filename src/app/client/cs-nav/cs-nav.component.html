@@ -1,13 +1,9 @@
-<header>
-  <div class='nav-con'>
-    <a routerLink='/' class='logo'>&nbsp;Green Planet Bikeshop</a>
-    <nav>
-      <ul>
-        <li><a routerLink='/'>Home</a></li>
-        <li><a routerLink='/products'>Products</a></li>
-        <li><a routerLink='/services'>Services</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<mat-toolbar color='primary' class='mat-elevation-z7'>
+  <span style='margin-left: 10px'>Green Planet Bikeshop</span>
+  <div class='spacer'></div>
+  <a mat-button routerLink='/'>&nbsp;Home&nbsp;</a>
+  <a mat-button routerLink='/products'>&nbsp;Products&nbsp;</a>
+  <a mat-button routerLink='/services'>&nbsp;Services&nbsp;</a>
+</mat-toolbar>
 <router-outlet></router-outlet>
+<app-cs-footer></app-cs-footer>

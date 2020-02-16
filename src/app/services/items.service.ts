@@ -19,8 +19,8 @@ export class ItemsService {
     }
   }
 
-  search(route: string): Observable<any> {
-    return this.http.get(Config.api + route, this.constructHeader())
+  search(obj: any): Observable<any> {
+    return this.http.post(Config.api + '/api/search-item', obj, this.constructHeader())
   }
 
   searchByName(name: string): Observable<any> {
@@ -31,8 +31,8 @@ export class ItemsService {
     return this.http.post(Config.api + '/api/add-item', data, this.constructHeader())
   }
 
-  updateAvail(data: any): Observable<any> {
-    return this.http.post(Config.api + '/api/set-availability', data, this.constructHeader())
+  updateFeature(data: any): Observable<any> {
+    return this.http.post(Config.api + '/api/set-feature', data, this.constructHeader())
   }
 
   updateItem(data: any): Observable<any> {
@@ -47,8 +47,12 @@ export class ItemsService {
     return this.http.post(Config.api + '/api/add-rec', data, this.constructHeader())
   }
 
-  getAllProd(): Observable<any> {
+  getAllProd() {
     return this.http.get(Config.api + '/api/all-prod', this.constructHeader())
+  }
+
+  getFeatured() {
+    return this.http.get(Config.api + '/api/get-feat', this.constructHeader())
   }
 
 }

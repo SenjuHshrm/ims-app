@@ -52,6 +52,8 @@ import { ViewProdComponent } from './client/cs-products/view-prod/view-prod.comp
 import { DashboardComponent } from './server/dashboard/dashboard.component';
 import { SsAddSalesComponent } from './server/ss-add-sales/ss-add-sales.component';
 import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item.component';
+import { FeatImgViewComponent } from './client/cs-home/feat-img-view/feat-img-view.component';
+import { CsFooterComponent } from './client/cs-footer/cs-footer.component';
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item
     ViewProdComponent,
     DashboardComponent,
     SsAddSalesComponent,
-    SsReceiveItemComponent
+    SsReceiveItemComponent,
+    FeatImgViewComponent,
+    CsFooterComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -115,7 +119,8 @@ import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item
   entryComponents: [
     ItemComponent,
     GenerateReportComponent,
-    ViewProdComponent
+    ViewProdComponent,
+    FeatImgViewComponent
   ],
   bootstrap: [AppComponent]
 })

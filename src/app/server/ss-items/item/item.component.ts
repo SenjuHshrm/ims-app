@@ -59,7 +59,6 @@ export class ItemComponent implements OnInit {
         price: '',
         desc: '',
         img: '',
-        itemCount: 0,
         format: ''
       }
       this.btnLabel = 'Add'
@@ -76,7 +75,6 @@ export class ItemComponent implements OnInit {
         price: this.data.inf.price,
         desc: this.data.inf.desc.join('\n'),
         img: 'data:image/png;jpg;jpeg;base64, ' + this.data.inf.img,
-        itemCount: this.data.inf.itemCount,
         format: ''
       }
       this.btnLabel = 'Update'
@@ -126,40 +124,43 @@ export class ItemComponent implements OnInit {
   }
 
   add(obj: any) {
-    console.log(this.itemInf.date)
-    this.desc = [];
-    let i = obj.img.indexOf(','),
-        ln = obj.img.length;
-    obj.img = obj.img.substring(i+1, ln)
-    _.forEach(obj.desc.split('\n'), arr => {
-      this.desc.push(arr)
-    })
-    if(obj.format == '') {
-      obj.format = 'nochange'
-    }
-    obj.desc = this.desc
-    obj.price = (obj.price.indexOf('.') == -1) ? this.cFrmt.numComma(obj.price) + '.00' : this.cFrmt.numComma(obj.price);
-    if(this.data.act == 'add') {
-
-      this.itmSvc.addItem(obj).subscribe(res => {
-        if(res.res) {
-          this.mdRef.close({ prod: this.itemInf.prod, cat: this.itemInf.cat })
-        } else {
-          console.log('Error code 500')
-        }
+    if(obj.prod != '' && obj.prod != '' && obj.name != '') {
+      this.desc = [];
+      let i = obj.img.indexOf(','),
+          ln = obj.img.length;
+      obj.img = obj.img.substring(i+1, ln)
+      _.forEach(obj.desc.split('\n'), arr => {
+        this.desc.push(arr)
       })
-    } else if(this.data.act == 'update') {
-      let data = {
-        id: this.data.inf._id,
-        xobj: obj
+      if(obj.format == '') {
+        obj.format = 'nochange'
       }
-      this.itmSvc.updateItem(data).subscribe(res => {
-        if(res.res) {
-          this.mdRef.close({ prod: this.itemInf.prod, cat: this.itemInf.cat })
-        } else {
-          console.log('Error code 500')
+      obj.desc = this.desc
+      obj.price = (obj.price.indexOf('.') == -1) ? this.cFrmt.numComma(obj.price) + '.00' : this.cFrmt.numComma(obj.price);
+      if(this.data.act == 'add') {
+
+        this.itmSvc.addItem(obj).subscribe(res => {
+          if(res.res) {
+            this.mdRef.close({ prod: this.itemInf.prod, cat: this.itemInf.cat })
+          } else {
+            console.log('Error code 500')
+          }
+        })
+      } else if(this.data.act == 'update') {
+        let data = {
+          id: this.data.inf._id,
+          xobj: obj
         }
-      })
+        this.itmSvc.updateItem(data).subscribe(res => {
+          if(res.res) {
+            this.mdRef.close({ prod: this.itemInf.prod, cat: this.itemInf.cat })
+          } else {
+            console.log('Error code 500')
+          }
+        })
+      }
+    } else {
+      console.log('empty')
     }
   }
 

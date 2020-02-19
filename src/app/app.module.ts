@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {
+  MatMenuModule,
   MatSnackBarModule,
   MatDialogModule,
   MatRadioModule,
@@ -110,7 +111,8 @@ import { CsFooterComponent } from './client/cs-footer/cs-footer.component';
     MatListModule,
     MatCardModule,
     LayoutModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule
   ],
   providers: [
     CanActivateRouteGuard,

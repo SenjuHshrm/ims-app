@@ -1,9 +1,19 @@
-<mat-toolbar color='primary' class='mat-elevation-z7'>
+<mat-toolbar color='primary' class='mat-elevation-z7' style='width: 100%'>
   <span style='margin-left: 10px'>Green Planet Bikeshop</span>
   <div class='spacer'></div>
-  <a mat-button routerLink='/'>&nbsp;Home&nbsp;</a>
-  <a mat-button routerLink='/products'>&nbsp;Products&nbsp;</a>
-  <a mat-button routerLink='/services'>&nbsp;Services&nbsp;</a>
+  <div fxShow='false' fxShow.gt-sm>
+    <a mat-button routerLink='/'>&nbsp;Home&nbsp;</a>
+    <a mat-button routerLink='/products'>&nbsp;Products&nbsp;</a>
+    <a mat-button routerLink='/services'>&nbsp;Services&nbsp;</a>
+  </div>
+  <button mat-icon-button [matMenuTriggerFor]='menu' fxHide='false' fxHide.gt-sm>
+    <mat-icon>menu</mat-icon>
+  </button>
 </mat-toolbar>
+<mat-menu x-position='before' y-position='below' #menu='matMenu'>
+  <a mat-menu-item routerLink='/'>&nbsp;Home&nbsp;</a>
+  <a mat-menu-item routerLink='/products'>&nbsp;Products&nbsp;</a>
+  <a mat-menu-item routerLink='/services'>&nbsp;Services&nbsp;</a>
+</mat-menu>
 <router-outlet></router-outlet>
 <app-cs-footer></app-cs-footer>

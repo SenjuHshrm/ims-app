@@ -43,9 +43,8 @@ $sys-theme: mat-light-theme($def-theme-primary, $def-theme-accent, $def-theme-wa
 
 
 
-html, body { height: 100%; }
-body { margin: 0;  font-family: 'CenturyGothic' !important;}
-
+html { height: 100%; margin: 0; }
+body { min-height: 100%; margin: 0; margin-bottom: -100px; font-family: 'CenturyGothic' !important;}
 .custom-dialog-container .mat-dialog-container {
   padding: 0;
 	border: 1px solid #0063EA;

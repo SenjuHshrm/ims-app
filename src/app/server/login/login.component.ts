@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  login(obj: any) {
+  login(obj: any, e: any) {
+    e.defaultPrevented
     if(obj.username != '' || obj.password != '') {
       this.authUser.auth(obj).subscribe(res => {
         switch(res.res) {
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
             let token: any = jwtDecode(res.res)
             let route = '/user/' + token.username;
             this.router.navigate([route])
+            //window.location.href = route
         }
       })
     }

@@ -1,4 +1,4 @@
-<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='20px'>
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='left' fxLayoutGap='20px' style='margin-top: 7px; width: 100%'>
   <div class='item item-1' fxFlex='100%'>
     <mat-card>
       <mat-card-header>
@@ -12,21 +12,18 @@
                 <mat-card-title>Bikes</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
+                <div class='container' fxLayout fxLayout.xs='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
                   <div *ngIf='!bikes'>No products yet</div>
-                  <ul class='item item-1' fxFLex='100%' *ngIf='bikes'>
-                    <div class='container' fxLayout fxLayout.xs='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
-                      <li class='item item-1 viewBtn' fxFlex='25%' *ngFor='let item of bikes' (click)='viewProd(item)'>
-                        <img [src]='"data:image/png;jpg;jpeg;base64, " + item.img | imageData' width='70px' height='70px'>
-                        <p>
-                          {{ item.name }}
-                          <br>
-                          <span>({{ ((item.isAvailable) ? 'In store' : 'Not available') }})</span><br>
-                          <span>{{ ('₱ ') + item.price }}</span>
-                        </p>
-                      </li>
-                    </div>
-                  </ul>
+                  <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of bikes'>
+                    <mat-card class='lsItem' (click)='viewProd(itm)'>
+                      <img [src]='"data:image/png;jpg;jpeg;base64, " + itm.img | imageData' width='70px' height='70px' class='imgBorder'>
+                      <mat-card-content>
+                        <p>{{ itm.name }}</p>
+                        <span>({{ ((itm.isAvailable) ? 'In store' : 'Not available') }})</span><br>
+                        <span>{{ ('₱ ') + itm.price }}</span>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -39,19 +36,16 @@
               <mat-card-content>
                 <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
                   <div *ngIf='!accessories'>No products yet</div>
-                  <ul class='item item-1' fxFLex='100%' *ngIf='accessories'>
-                    <div class='container' fxLayout fxLayout.xs='column' fxLayout.md='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
-                      <li class='item item-1 viewBtn' fxFlex='25%' *ngFor='let item of accessories' (click)='viewProd(item)'>
-                        <img [src]='"data:image/png;jpg;jpeg;base64, " + item.img | imageData' width='70px' height='70px'>
-                        <p>
-                          {{ item.name }}
-                          <br>
-                          <span>({{ ((item.isAvailable) ? 'In store' : 'Not available') }})</span><br>
-                          <span>{{ ('₱ ') + item.price }}</span>
-                        </p>
-                      </li>
-                    </div>
-                  </ul>
+                  <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of accessories'>
+                    <mat-card class='lsItem' (click)='viewProd(itm)'>
+                      <img [src]='"data:image/png;jpg;jpeg;base64, " + itm.img | imageData' width='70px' height='70px' class='imgBorder'>
+                      <mat-card-content>
+                        <p>{{ itm.name }}</p>
+                        <span>({{ ((itm.isAvailable) ? 'In store' : 'Not available') }})</span><br>
+                        <span>{{ ('₱ ') + itm.price }}</span>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -64,19 +58,16 @@
               <mat-card-content>
                 <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
                   <div *ngIf='!wheels'>No products yet</div>
-                  <ul class='item item-1' fxFLex='100%' *ngIf='wheels'>
-                    <div class='container' fxLayout fxLayout.xs='column' fxLayout.md='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
-                      <li class='item item-1 viewBtn' fxFlex='25%' *ngFor='let item of wheels' (click)='viewProd(item)'>
-                        <img [src]='"data:image/png;jpg;jpeg;base64, " + item.img | imageData' width='70px' height='70px'>
-                        <p>
-                          {{ item.name }}
-                          <br>
-                          <span>({{ ((item.isAvailable) ? 'In store' : 'Not available') }})</span><br>
-                          <span>{{ ('₱ ') + item.price }}</span>
-                        </p>
-                      </li>
-                    </div>
-                  </ul>
+                  <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of wheels'>
+                    <mat-card class='lsItem' (click)='viewProd(itm)'>
+                      <img [src]='"data:image/png;jpg;jpeg;base64, " + itm.img | imageData' width='70px' height='70px' class='imgBorder'>
+                      <mat-card-content>
+                        <p>{{ itm.name }}</p>
+                        <span>({{ ((itm.isAvailable) ? 'In store' : 'Not available') }})</span><br>
+                        <span>{{ ('₱ ') + itm.price }}</span>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -89,19 +80,16 @@
               <mat-card-content>
                 <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
                   <div *ngIf='!components'>No products yet</div>
-                  <ul class='item item-1' fxFLex='100%' *ngIf='components'>
-                    <div class='container' fxLayout fxLayout.xs='column' fxLayout.md='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
-                      <li class='item item-1 viewBtn' fxFlex='25%' *ngFor='let item of components' (click)='viewProd(item)'>
-                        <img [src]='"data:image/png;jpg;jpeg;base64, " + item.img | imageData' width='70px' height='70px'>
-                        <p>
-                          {{ item.name }}
-                          <br>
-                          <span>({{ ((item.isAvailable) ? 'In store' : 'Not available') }})</span><br>
-                          <span>{{ ('₱ ') + item.price }}</span>
-                        </p>
-                      </li>
-                    </div>
-                  </ul>
+                  <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of components'>
+                    <mat-card class='lsItem' (click)='viewProd(itm)'>
+                      <img [src]='"data:image/png;jpg;jpeg;base64, " + itm.img | imageData' width='70px' height='70px' class='imgBorder'>
+                      <mat-card-content>
+                        <p>{{ itm.name }}</p>
+                        <span>({{ ((itm.isAvailable) ? 'In store' : 'Not available') }})</span><br>
+                        <span>{{ ('₱ ') + itm.price }}</span>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -114,19 +102,16 @@
               <mat-card-content>
                 <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
                   <div *ngIf='!workshop'>No products yet</div>
-                  <ul class='item item-1' fxFLex='100%' *ngIf='workshop'>
-                    <div class='container' fxLayout fxLayout.xs='column' fxLayout.md='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
-                      <li class='item item-1 viewBtn' fxFlex='25%' *ngFor='let item of workshop' (click)='viewProd(item)'>
-                        <img [src]='"data:image/png;jpg;jpeg;base64, " + item.img | imageData' width='70px' height='70px'>
-                        <p>
-                          {{ item.name }}
-                          <br>
-                          <span>({{ ((item.isAvailable) ? 'In store' : 'Not available') }})</span><br>
-                          <span>{{ ('₱ ') + item.price }}</span>
-                        </p>
-                      </li>
-                    </div>
-                  </ul>
+                  <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of workshop'>
+                    <mat-card class='lsItem' (click)='viewProd(itm)'>
+                      <img [src]='"data:image/png;jpg;jpeg;base64, " + itm.img | imageData' width='70px' height='70px' class='imgBorder'>
+                      <mat-card-content>
+                        <p>{{ itm.name }}</p>
+                        <span>({{ ((itm.isAvailable) ? 'In store' : 'Not available') }})</span><br>
+                        <span>{{ ('₱ ') + itm.price }}</span>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
                 </div>
               </mat-card-content>
             </mat-card>

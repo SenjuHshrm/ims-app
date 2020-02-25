@@ -34,7 +34,7 @@
                 <mat-card-title>Accessories</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
+                <div class='container' fxLayout fxLayout.xs='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
                   <div *ngIf='!accessories'>No products yet</div>
                   <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of accessories'>
                     <mat-card class='lsItem' (click)='viewProd(itm)'>
@@ -56,7 +56,7 @@
                 <mat-card-title>Wheels</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
+                <div class='container' fxLayout fxLayout.xs='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
                   <div *ngIf='!wheels'>No products yet</div>
                   <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of wheels'>
                     <mat-card class='lsItem' (click)='viewProd(itm)'>
@@ -78,7 +78,7 @@
                 <mat-card-title>Components</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
+                <div class='container' fxLayout fxLayout.xs='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
                   <div *ngIf='!components'>No products yet</div>
                   <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of components'>
                     <mat-card class='lsItem' (click)='viewProd(itm)'>
@@ -100,7 +100,7 @@
                 <mat-card-title>Workshop</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
+                <div class='container' fxLayout fxLayout.xs='column' fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap='20px'>
                   <div *ngIf='!workshop'>No products yet</div>
                   <div class='item item-1' fxFlex='25%' fxFlex.xs='100%' *ngFor='let itm of workshop'>
                     <mat-card class='lsItem' (click)='viewProd(itm)'>

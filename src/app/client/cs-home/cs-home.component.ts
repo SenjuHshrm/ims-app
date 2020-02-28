@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material';
 })
 export class CsHomeComponent implements OnInit {
 
-  public featProd: any
+  public featProd: any = [];
 
   constructor(
     private itm: ItemsService,

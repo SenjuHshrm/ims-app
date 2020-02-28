@@ -1,3 +1,3 @@
 export enum Config {
-  api = 'http://localhost:3000'
+  api = 'https://greenplanet-bikeshop.herokuapp.com'
 }

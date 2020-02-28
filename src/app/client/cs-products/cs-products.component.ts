@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ItemsService } from '../../services/items.service';
 import { ViewProdComponent } from '../../client/cs-products/view-prod/view-prod.component';
@@ -19,6 +19,12 @@ export class CsProductsComponent implements OnInit {
   public components: any = [];
   public workshop: any = [];
   public searchRes: any;
+
+  bikesOpt: string;
+  accsOpt: string;
+  wheelOpt: string;
+  comptsOpt: string;
+  workspOpt: string;
 
   constructor(
     private srchItem: ItemsService,
@@ -62,6 +68,102 @@ export class CsProductsComponent implements OnInit {
       width: '60%',
       height: '90%'
     })
+  }
+
+  sortBike(val: any) {
+    console.log(val)
+    switch(val) {
+      case 'Name':
+        this.bikes.sort((a, b) => {
+          let txtA = a.name.toUpperCase();
+          let txtB = b.name.toUpperCase();
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+      case 'Price':
+        this.bikes.sort((a, b) => {
+          let txtA = parseFloat(a.price.replace(/,/g,''));
+          let txtB = parseFloat(b.price.replace(/,/g,''));
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+    }
+  }
+  sortAccs(val: any) {
+    console.log(val)
+    switch(val) {
+      case 'Name':
+        this.accessories.sort((a, b) => {
+          let txtA = a.name.toUpperCase();
+          let txtB = b.name.toUpperCase();
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+      case 'Price':
+        this.accessories.sort((a, b) => {
+          let txtA = parseFloat(a.price.replace(/,/g,''));
+          let txtB = parseFloat(b.price.replace(/,/g,''));
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+    }
+  }
+  sortWhls(val: any) {
+    console.log(val)
+    switch(val) {
+      case 'Name':
+        this.wheels.sort((a, b) => {
+          let txtA = a.name.toUpperCase();
+          let txtB = b.name.toUpperCase();
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+      case 'Price':
+        this.wheels.sort((a, b) => {
+          let txtA = parseFloat(a.price.replace(/,/g,''));
+          let txtB = parseFloat(b.price.replace(/,/g,''));
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+    }
+  }
+  sortCompts(val: any) {
+    console.log(val)
+    switch(val) {
+      case 'Name':
+        this.components.sort((a, b) => {
+          let txtA = a.name.toUpperCase();
+          let txtB = b.name.toUpperCase();
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+      case 'Price':
+        this.components.sort((a, b) => {
+          let txtA = parseFloat(a.price.replace(/,/g,''));
+          let txtB = parseFloat(b.price.replace(/,/g,''));
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+    }
+  }
+  sortWorksp(val: any) {
+    console.log(val)
+    switch(val) {
+      case 'Name':
+        this.workshop.sort((a, b) => {
+          let txtA = a.name.toUpperCase();
+          let txtB = b.name.toUpperCase();
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+      case 'Price':
+        this.workshop.sort((a, b) => {
+          let txtA = parseFloat(a.price.replace(/,/g,''));
+          let txtB = parseFloat(b.price.replace(/,/g,''));
+          return (txtA < txtB) ? -1 : (txtA > txtB) ? 1 : 0;
+        })
+        break;
+    }
   }
 
 }

@@ -23,7 +23,8 @@ import {
   MatIconModule,
   MatListModule,
   MatCardModule,
-  MatPaginatorModule } from '@angular/material';
+  MatPaginatorModule,
+  MatTabsModule } from '@angular/material';
 import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
 import { AuthService } from './services/auth.service'
 
@@ -55,6 +56,7 @@ import { SsAddSalesComponent } from './server/ss-add-sales/ss-add-sales.componen
 import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item.component';
 import { FeatImgViewComponent } from './client/cs-home/feat-img-view/feat-img-view.component';
 import { CsFooterComponent } from './client/cs-footer/cs-footer.component';
+import { ScrollTopDirective } from './directive/scroll-top.directive';
 
 
 @NgModule({
@@ -84,7 +86,8 @@ import { CsFooterComponent } from './client/cs-footer/cs-footer.component';
     SsAddSalesComponent,
     SsReceiveItemComponent,
     FeatImgViewComponent,
-    CsFooterComponent
+    CsFooterComponent,
+    ScrollTopDirective
   ],
   imports: [
     ReactiveFormsModule,
@@ -112,7 +115,8 @@ import { CsFooterComponent } from './client/cs-footer/cs-footer.component';
     MatCardModule,
     LayoutModule,
     MatPaginatorModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTabsModule
   ],
   providers: [
     CanActivateRouteGuard,

@@ -1,7 +1,7 @@
 <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' style='margin-top: 30px'>
   <div class='item item-1' fxFlex='5%'></div>
   <div class='item item-2' fxFlex='90%'>
-    <mat-card fxFlex='100%'>
+    <mat-card fxFlex='100%' class='mat-elevation-z8'>
       <form (ngSubmit)='add(acctInfo, $event)'>
         <mat-card-header>
           <mat-card-title>Add Account</mat-card-title>
@@ -47,6 +47,15 @@
                   <mat-label>Contact</mat-label>
                   <input matInput type='text' [(ngModel)]='acctInfo.contact' name='contact'>
                 </mat-form-field>
+              </div>
+              <div class='container' fxLayout fxLayout.xs='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+                <mat-form-field class='item item-1' fxFlex='30%' fxFlexOffset='4%'>
+                  <mat-label>Account Level</mat-label>
+                  <mat-select [(ngModel)]='acctInfo.type' name='type'>
+                    <mat-option *ngFor='let i of acctType' [value]='i.value'>{{ i.viewVal }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-checkbox class='item item-2' fxFlex='30%' [(ngModel)]='acctInfo.activated' name='activated'>Activate Account</mat-checkbox>
               </div>
             </div>
           </div>

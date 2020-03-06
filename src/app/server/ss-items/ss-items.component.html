@@ -1,7 +1,7 @@
 <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' style='margin-top: 30px'>
   <div class='item item-1' fxFlex='5%'></div>
   <div class='item item-2' fxFlex='90%'>
-    <mat-card>
+    <mat-card class='mat-elevation-z8'>
       <mat-card-header>
         <mat-card-title>Items List</mat-card-title>
       </mat-card-header>
@@ -21,7 +21,7 @@
                   <mat-option *ngFor='let sc of subCat' [value]='sc.value'>{{ sc.viewVal }}</mat-option>
                 </mat-select>
               </mat-form-field>
-              <button mat-raised-button type='button' class='item item-3' fxFlex='30%' color='primary' (click)='search($event, searchParam)'><mat-icon>search</mat-icon>Search</button>
+              <button mat-raised-button type='button' class='item item-3' fxFlex='30%' color='primary' (click)='search(searchParam, $event)'><mat-icon>search</mat-icon>Search</button>
             </div>
           </div>
           <div class='item item-2' fxFlex='100%'>
@@ -46,10 +46,6 @@
                     <th mat-header-cell *matHeaderCellDef>Color</th>
                     <td mat-cell *matCellDef='let data'>{{ data.color }}</td>
                   </ng-container>
-                  <ng-container matColumnDef='description'>
-                    <th mat-header-cell *matHeaderCellDef>Description</th>
-                    <td mat-cell *matCellDef='let data'><p [innerHTML]='data.description'></p></td>
-                  </ng-container>
                   <ng-container matColumnDef='price'>
                     <th mat-header-cell *matHeaderCellDef>Price</th>
                     <td mat-cell *matCellDef='let data'>{{ data.price }}</td>
@@ -64,7 +60,7 @@
                   </ng-container>
                   <ng-container matColumnDef='feature'>
                     <th mat-header-cell *matHeaderCellDef>Feature to Site</th>
-                    <td mat-cell *matCellDef='let data'><mat-checkbox [(ngModel)]='data.feature' (change)="toggleFeature(data)"></mat-checkbox></td>
+                    <td mat-cell *matCellDef='let data'><mat-checkbox [(ngModel)]='data.feature' (change)='toggleFeature($event, data)' name='data.name'></mat-checkbox></td>
                   </ng-container>
                   <ng-container matColumnDef='action'>
                     <th mat-header-cell *matHeaderCellDef>Update Item</th>

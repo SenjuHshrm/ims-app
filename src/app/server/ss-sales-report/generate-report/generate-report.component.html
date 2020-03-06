@@ -1,7 +1,7 @@
 <h2>Report</h2>
 <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='center' fxLayoutGap='10px'>
   <div class='item item-1' fxFLex='100%'>
-    <iframe [src]='pdfFile | imageData' width='100%' height='1300px'></iframe>
+    <iframe [src]='pdfFile | imageData' width='100%' height='400px'></iframe>
   </div>
-  <button mat-raised-button class='item item-2' fxFlex='30%' (click)='close()'><mat-icon>cancel</mat-icon>&nbsp;Close</button>
+  <button mat-raised-button class='item item-2' fxFlex='30%' (click)='close()' color='warn'><mat-icon>cancel</mat-icon>&nbsp;Close</button>
 </div>

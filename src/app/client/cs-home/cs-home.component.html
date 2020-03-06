@@ -1,20 +1,40 @@
-<div class='container first-col' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px'>
-  <div class='item item-1' fxFlex='100%'></div>
+<div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='left' fxLayoutGap='20px' style='margin: 10px'>
   <div class='item item-2' fxFlex='100%'>
     <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
-      <div class='' fxFlex='10%'></div>
-      <div class='item item-2' fxFlex='35%'>
-        <div class='quote-container' unselectable='on'>
-          <h1>Increase Global Cycling,</h1>
-          <h1>Decrease Global Warming</h1>
-        </div>
+      <div class='item item-1' fxFlex='100%'>
+        <mat-carousel
+          timings='250ms ease-in'
+          [autoplay]='true'
+          interval='5000'
+          color='accent'
+          maxWidth='auto'
+          proportion='40'
+          slides='5'
+          [loop]='true'
+          [hideArrows]='false'
+          [hideIndicators]='false'
+          [useKeyboard]='true'
+          [useMouseWheel]='false'
+          orientation='ltr'>
+          <mat-carousel-slide
+            #matCarouselSlide
+            *ngFor='let slide of carouselImg; let i = index'
+            [image]='slide.image'
+            overlayColor='#00000040'
+            [hideOverlay]='false'>
+          </mat-carousel-slide>
+          <div class='quote-container' unselectable='on'>
+            <h1>Increase Global Cycling,</h1>
+            <h1>Decrease Global Warming</h1>
+          </div>
+        </mat-carousel>
       </div>
     </div>
   </div>
 </div>
-<div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-top: 10px'>
-  <div class='item item-1' fxFlex='70%'>
-    <mat-card>
+<div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap='20px' style='margin: 10px'>
+  <div class='item item-1' fxFlex='50%'>
+    <mat-card class='mat-elevation-z8'>
       <mat-card-header>
         <mat-card-title>About our shop</mat-card-title>
       </mat-card-header>
@@ -28,8 +48,8 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class='item item-1' fxFlex='30%'>
-    <mat-card>
+  <div class='item item-1' fxFlex='50%'>
+    <mat-card class='mat-elevation-z8'>
       <mat-card-header>
         <mat-card-title>Shop hours</mat-card-title>
       </mat-card-header>
@@ -37,19 +57,28 @@
         <span class='siteFontSize'>Shop hours are from 9:00 o’clock in the morning until 7:00 o’clock in the evening.</span>
       </mat-card-content>
     </mat-card>
+    <mat-card class='mat-elevation-z8' style='margin-top: 10px'>
+      <mat-card-header>
+        <mat-card-title>Location</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span class='siteFontSize'>No. 28, T. Azucena St., San Pablo City, Laguna, 4000 <a matTooltip='Click here to locate via Google Maps' matTooltipPosition='above' matTooltipClass='tooltip-bg' href='https://www.google.com/maps/search/?api=1&query=14.070897,121.326969' target='_blank'><mat-icon>launch</mat-icon></a></span>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>
-<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-top: 10px'>
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px' style='margin: 10px'>
   <div class='item item-1' fxFlex='100%'>
-    <mat-card>
+    <mat-card class='mat-elevation-z8'>
       <mat-card-header>
         <mat-card-title>Featured Products</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='center center' fxLayoutGap='20px' *ngIf='featProd.length > 0'>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='center center' fxLayoutGap='20px'>
+          <div *ngIf='featProd.length == 0'>No featured products yet</div>
           <div class='item item-1' fxFlex='25%' *ngFor='let itm of featProd' style='text-align: center'>
-            <img class='click' [src]='"data:image/png;jpg;jpeg;base64, " + itm.img | imageData' width='100px' height='100px' (click)='viewImg(itm.img)'>
-            <p>{{ itm.name }}</p>
+            <img [src]='"data:image/png;jpg;jpeg;base64, " + itm.img | imageData' width='100px' height='100px'>
+            <p class='ftItemName'><b>{{ itm.name }}</b></p>
             <p>{{ ('₱ ') + itm.price }}</p>
           </div>
         </div>
@@ -63,9 +92,9 @@
     </mat-card>
   </div>
 </div>
-<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-top: 10px'>
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' fxLayoutGap='20px' style='margin: 10px'>
   <div class='item item-1' fxFlex='100%'>
-    <mat-card>
+    <mat-card class='mat-elevation-z8'>
       <mat-card-header>
         <mat-card-title>Services</mat-card-title>
       </mat-card-header>
@@ -80,4 +109,8 @@
       </mat-card-content>
     </mat-card>
   </div>
+</div>
+<!-- <div #mapContainer id="map"></div> -->
+<div class='progBar' [class.doneLoading]='!prgLoading'>
+  <mat-progress-spinner mode='indeterminate' value='25' color='accent'></mat-progress-spinner>
 </div>

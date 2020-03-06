@@ -17,7 +17,7 @@ export class SsReceiveItemComponent implements OnInit {
   public itemInf: any;
   public name: string;
   public itemsLs = new MatTableDataSource(itemLs)
-  public tableHeader: string[] = ['name', 'img', 'color', 'description' ,'price' ,'itemCount']
+  public tableHeader: string[] = ['name', 'img', 'color','price' ,'itemCount']
   public selectedRow = [];
   public resp: string;
   public selId: string;
@@ -69,7 +69,6 @@ export class SsReceiveItemComponent implements OnInit {
           name: arr.name,
           img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
           color: arr.color,
-          description: arr.desc.join('<br>'),
           price: '₱ ' + arr.price,
           itemCount: arr.itemCount,
           availability: arr.isAvailable,

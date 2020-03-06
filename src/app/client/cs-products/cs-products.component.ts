@@ -12,13 +12,14 @@ import * as _ from 'lodash';
 export class CsProductsComponent implements OnInit {
 
   public searchParam: any;
-  public prod: any;
+  public prod: any = [];
   public bikes: any = [];
   public accessories: any = [];
   public wheels: any = [];
   public components: any = [];
   public workshop: any = [];
   public searchRes: any;
+  public prgLoading: boolean = true
 
   bikesOpt: string;
   accsOpt: string;
@@ -34,6 +35,7 @@ export class CsProductsComponent implements OnInit {
 
   ngOnInit() {
     this.srchItem.getAllProd().subscribe(res => {
+      this.prgLoading = false
       this.prod = res
       console.log(this.prod)
       _.forEach(this.prod, arr => {
@@ -65,8 +67,8 @@ export class CsProductsComponent implements OnInit {
   viewProd(obj: any) {
     this.md.open(ViewProdComponent, {
       data: obj,
-      width: '60%',
-      height: '90%'
+      disableClose: true,
+      panelClass: 'mat-dialog-container-custom'
     })
   }
 

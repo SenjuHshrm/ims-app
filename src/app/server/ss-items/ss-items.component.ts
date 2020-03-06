@@ -23,11 +23,11 @@ export class SsItemsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public itemsTable = new MatTableDataSource(itemLs)
-  public itemsList: any;
+  public itemsList: any = [];
   public searchParam: any;
   public defVals: any;
   public subCat: SelectOpts[] = [];
-  public tableHeader: string[] = ['name', 'img', 'color', 'description' ,'price' ,'itemCount', 'availability', 'feature', 'action']
+  public tableHeader: string[] = ['name', 'img', 'color', 'price', 'itemCount', 'availability', 'feature', 'action']
   public products: SelectOpts[] = [
     { value: 'Bikes', viewVal: 'Bikes' },
     { value: 'Accessories', viewVal: 'Accessories' },
@@ -60,7 +60,6 @@ export class SsItemsComponent implements OnInit {
             name: arr.name,
             img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
             color: arr.color,
-            description: arr.desc.join('<br>'),
             price: '₱ ' + arr.price,
             itemCount: arr.itemCount,
             availability: arr.isAvailable,
@@ -89,8 +88,12 @@ export class SsItemsComponent implements OnInit {
     })
   }
 
-  search(evt: MouseEvent, obj: any) {
-    evt.defaultPrevented
+  search(obj: any, evt?: MouseEvent) {
+    if(evt !== undefined){
+      evt.defaultPrevented
+    }
+    this.itemsList = []
+    itemLs = [];
     let param: any;
     if(obj.prod == '' && obj.cat == '') {
       param = { }
@@ -100,16 +103,14 @@ export class SsItemsComponent implements OnInit {
       param = { product: obj.prod, category: obj.cat }
     }
     this.itm.search(param).subscribe(res => {
-      itemLs = [];
       this.itemsList = res
-      if(res.length > 0) {
-        _.forEach(res, arr => {
+      if(this.itemsList.length > 0) {
+        _.forEach(this.itemsList, arr => {
           itemLs.push({
             id: arr._id,
             name: arr.name,
             img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
             color: arr.color,
-            description: arr.desc.join('<br>'),
             price: '₱ ' + arr.price,
             itemCount: arr.itemCount,
             availability: arr.isAvailable,
@@ -164,11 +165,12 @@ export class SsItemsComponent implements OnInit {
     })
   }
 
-  toggleFeature(row: any) {
+  toggleFeature(evt: MouseEvent, row: any) {
+    evt.defaultPrevented
+    console.log(row)
     this.itm.updateFeature(row).subscribe(res => {
       if(res.res) {
-        let me = new MouseEvent('click')
-        this.search(me, this.searchParam)
+        this.search(this.searchParam)
       } else {
         row.feature = false
         this.sBar.open('Featured items limit is four (4)', 'OK', { duration: 2000 })

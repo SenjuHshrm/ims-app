@@ -1,7 +1,7 @@
 <div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' style='margin-top: 30px'>
   <div class='item item-1' fxFlex='5%'></div>
   <div class='item item-2' fxFlex='90%'>
-    <mat-card>
+    <mat-card class='mat-elevation-z8'>
       <mat-card-header>
         <mat-card-title>Receive Items</mat-card-title>
       </mat-card-header>
@@ -29,10 +29,6 @@
               <ng-container matColumnDef='color'>
                 <th mat-header-cell *matHeaderCellDef>Color</th>
                 <td mat-cell *matCellDef='let data'>{{ data.color }}</td>
-              </ng-container>
-              <ng-container matColumnDef='description'>
-                <th mat-header-cell *matHeaderCellDef>Description</th>
-                <td mat-cell *matCellDef='let data'><p [innerHTML]='data.description'></p></td>
               </ng-container>
               <ng-container matColumnDef='price'>
                 <th mat-header-cell *matHeaderCellDef>Price</th>

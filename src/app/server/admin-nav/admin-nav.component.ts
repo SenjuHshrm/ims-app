@@ -14,7 +14,7 @@ import { map, filter, withLatestFrom } from 'rxjs/operators';
 export class AdminNavComponent implements OnInit{
   @ViewChild('drawer') drawer: MatSidenav
   public navLs: any = [
-    { path: 'dashboard', name: 'Dashboard', ic: 'dashboard' },
+    // { path: 'dashboard', name: 'Dashboard', ic: 'dashboard' },
     { path: 'items', name: 'Items', ic: 'storage' },
     { path: 'sales', name: 'Daily Sales', ic: 'trending_up' },
     { path: 'report', name: 'Sales report', ic: 'poll' },
@@ -46,6 +46,11 @@ export class AdminNavComponent implements OnInit{
   checkAcctType() {
     let token: any = jwtDecode(localStorage.getItem('gpAdmin'));
     return (token.type == 'superAdmin') ? true : false;
+  }
+
+  checkAcctType2() {
+    let token: any = jwtDecode(localStorage.getItem('gpAdmin'));
+    return (token.type == 'superAdmin' || token.type == 'admin') ? true : false;
   }
 
   getUsername() {

@@ -4,6 +4,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { HttpClientModule } from '@angular/common/http';
 import {
   MatMenuModule,
@@ -24,7 +25,11 @@ import {
   MatListModule,
   MatCardModule,
   MatPaginatorModule,
-  MatTabsModule } from '@angular/material';
+  MatTabsModule,
+  MatProgressSpinnerModule,
+  MatSlideToggleModule,
+  MatProgressBarModule,
+  MatTooltipModule } from '@angular/material';
 import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
 import { AuthService } from './services/auth.service'
 
@@ -56,7 +61,7 @@ import { SsAddSalesComponent } from './server/ss-add-sales/ss-add-sales.componen
 import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item.component';
 import { FeatImgViewComponent } from './client/cs-home/feat-img-view/feat-img-view.component';
 import { CsFooterComponent } from './client/cs-footer/cs-footer.component';
-import { ScrollTopDirective } from './directive/scroll-top.directive';
+import { AcctListComponent } from './server/acct-list/acct-list.component';
 
 
 @NgModule({
@@ -87,7 +92,7 @@ import { ScrollTopDirective } from './directive/scroll-top.directive';
     SsReceiveItemComponent,
     FeatImgViewComponent,
     CsFooterComponent,
-    ScrollTopDirective
+    AcctListComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -116,7 +121,12 @@ import { ScrollTopDirective } from './directive/scroll-top.directive';
     LayoutModule,
     MatPaginatorModule,
     MatMenuModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCarouselModule.forRoot(),
+    MatProgressSpinnerModule,
+    MatSlideToggleModule,
+    MatProgressBarModule,
+    MatTooltipModule
   ],
   providers: [
     CanActivateRouteGuard,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AddAcctService } from '../../services/add-acct.service';
+import { SelectOpts } from '../../interfaces/select-opts';
 
 @Component({
   selector: 'app-ss-add-acct',
@@ -11,6 +12,10 @@ import { AddAcctService } from '../../services/add-acct.service';
 export class SsAddAcctComponent implements OnInit {
 
   public acctInfo: any;
+  public acctType: SelectOpts[] = [
+    { value: 'admin', viewVal: 'Admin' },
+    { value: 'encoder', viewVal: 'Encoder' }
+  ]
 
   constructor(
     private addAcct: AddAcctService,
@@ -26,7 +31,9 @@ export class SsAddAcctComponent implements OnInit {
       mName: '',
       lName: '',
       addr: '',
-      contact: ''
+      contact: '',
+      type: '',
+      activated: false
     }
   }
 

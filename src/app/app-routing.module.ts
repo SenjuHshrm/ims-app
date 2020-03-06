@@ -18,6 +18,7 @@ import { DashboardComponent } from './server/dashboard/dashboard.component';
 import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
 import { SsAddSalesComponent } from './server/ss-add-sales/ss-add-sales.component';
 import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item.component';
+import { AcctListComponent } from './server/acct-list/acct-list.component';
 
 const routes: Routes = [
   { path: '', component: CsSiteLayoutComponent,
@@ -34,14 +35,15 @@ const routes: Routes = [
   { path: 'user/:username', component: SsPanelLayoutComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [CanActivateRouteGuard] },
-      { path: 'dashboard', component: DashboardComponent, canActivate: [CanActivateRouteGuard] },
-      { path: 'items', component: SsItemsComponent, canActivate: [CanActivateRouteGuard] },
-      { path: 'sales', component: SsDailySalesComponent, canActivate: [CanActivateRouteGuard] },
-      { path: 'sales/add', component: SsAddSalesComponent, canActivate: [CanActivateRouteGuard] },
-      { path: 'sales/receive', component: SsReceiveItemComponent, canActivate: [CanActivateRouteGuard] },
-      { path: 'report', component: SsSalesReportComponent, canActivate: [CanActivateRouteGuard] },
-      { path: 'add-acct', component: SsAddAcctComponent, canActivate: [CanActivateRouteGuard] },
-      { path: 'acct-setting', component: UpdateAcctInfoComponent, canActivate: [CanActivateRouteGuard]}
+      { path: 'dashboard', component: DashboardComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin'] } },
+      { path: 'items', component: SsItemsComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
+      { path: 'sales', component: SsDailySalesComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
+      { path: 'sales/add', component: SsAddSalesComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
+      { path: 'sales/receive', component: SsReceiveItemComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
+      { path: 'report', component: SsSalesReportComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
+      { path: 'add-acct', component: SsAddAcctComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin'] } },
+      { path: 'acct-setting', component: UpdateAcctInfoComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
+      { path: 'acct-list', component: AcctListComponent, canActivate:[CanActivateRouteGuard], data: { roles: ['superAdmin'] } }
   ]},
   { path: '**', redirectTo: 'path/404' },
   { path: 'path/404', component: NotFoundComponent }

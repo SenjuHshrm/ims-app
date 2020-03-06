@@ -26,8 +26,8 @@ export class SsSalesReportComponent implements OnInit {
   ngOnInit() {
     this.inf = {
       type: '',
-      dateFrom: '',
-      dateTo: ''
+      dateFrom: new Date(),
+      dateTo: new Date()
     }
   }
 
@@ -40,7 +40,7 @@ export class SsSalesReportComponent implements OnInit {
       this.gRep.generate(obj).subscribe(res => {
         this.md.open(GenerateReportComponent, {
           disableClose: true,
-          data: res.res,
+          data: res,
           width: '70%',
           height: '90%'
         })

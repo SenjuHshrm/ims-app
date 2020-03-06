@@ -16,7 +16,7 @@ export class GenerateReportComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.pdfFile = 'data:application/pdf;base64, ' + this.data
+    this.pdfFile = 'data:application/pdf;base64,' + this.data.res
   }
 
   close() {

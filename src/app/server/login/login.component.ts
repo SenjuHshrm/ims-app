@@ -14,6 +14,7 @@ import * as jwtDecode from 'jwt-decode';
 export class LoginComponent implements OnInit {
 
   public loginForm: any;
+  public loginProc: boolean = false;
 
   constructor(
     private sBar: MatSnackBar,
@@ -37,8 +38,10 @@ export class LoginComponent implements OnInit {
 
   login(obj: any, e: any) {
     e.defaultPrevented
+    this.loginProc = true
     if(obj.username != '' || obj.password != '') {
       this.authUser.auth(obj).subscribe(res => {
+        this.loginProc = false
         switch(res.res) {
           case 'ER':
             this.openSnackBar('An error occured (code 500)', 'OK')
@@ -48,6 +51,9 @@ export class LoginComponent implements OnInit {
             break;
           case 'WP':
             this.openSnackBar('Incorrect password', 'OK')
+            break;
+          case 'NACT':
+          this.openSnackBar('This account is not activated', 'OK')
             break;
           default:
             localStorage.setItem('gpAdmin', res.res)

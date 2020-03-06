@@ -26,4 +26,8 @@ export class ViewProdComponent implements OnInit {
     }
   }
 
+  close() {
+    this.mdRef.close()
+  }
+
 }

@@ -169,9 +169,7 @@ export class SsItemsComponent implements OnInit {
     evt.defaultPrevented
     console.log(row)
     this.itm.updateFeature(row).subscribe(res => {
-      if(res.res) {
-        this.search(this.searchParam)
-      } else {
+      if(!res.res) {
         row.feature = false
         this.sBar.open('Featured items limit is four (4)', 'OK', { duration: 2000 })
       }

@@ -21,6 +21,16 @@ export class CsHomeComponent implements OnInit, AfterViewInit {
     { image: '../../assets/carousel/5.jpg' },
   ]
 
+  public gallImg: any = [
+    { image: '../../assets/gallery/1.jpg' },
+    { image: '../../assets/gallery/2.jpg' },
+    { image: '../../assets/gallery/3.jpg' },
+    { image: '../../assets/gallery/4.jpg' },
+    { image: '../../assets/gallery/5.jpg' },
+    { image: '../../assets/gallery/6.jpg' },
+    { image: '../../assets/gallery/7.jpg' },
+  ]
+
   // @ViewChild('mapContainer') gmap: ElementRef;
 
   // public map: google.maps.Map;

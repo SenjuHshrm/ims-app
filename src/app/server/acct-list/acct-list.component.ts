@@ -60,7 +60,10 @@ export class AcctListComponent implements OnInit {
     console.log(data)
     this.user.activationToggle(data).subscribe(res => {
       if(res) {
-        this.populateTable()
+        this.usersLs = []
+        this.user.getUserLs().subscribe(res => {
+          this.usersLs = res
+        })
       }
     })
   }

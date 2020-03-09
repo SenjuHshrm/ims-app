@@ -1,0 +1,16 @@
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' style='margin: 10px'>
+  <div class='item item-1' fxFlex='100%'>
+    <mat-card class='mat-elevation-z8'>
+      <mat-card-header>
+        <mat-card-title>Gallery</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class='container' fxLayout fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap.xs='3px' fxLayoutGap.sm='5px' fxLayoutGap.md='8px' fxLayoutGap='10px'>
+          <div class='item item-1 imgThumb' fxFlex='20%' *ngFor='let img of gallImg' fxLayoutAlign='center'>
+            <img [src]='img.image' class='img' (click)='viewImg(img.image)' style='margin-bottom: 3px'>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

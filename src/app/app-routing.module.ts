@@ -19,13 +19,15 @@ import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
 import { SsAddSalesComponent } from './server/ss-add-sales/ss-add-sales.component';
 import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item.component';
 import { AcctListComponent } from './server/acct-list/acct-list.component';
+import { CsGalleryComponent } from './client/cs-gallery/cs-gallery.component';
 
 const routes: Routes = [
   { path: '', component: CsSiteLayoutComponent,
     children: [
       { path: '', component: CsHomeComponent },
       { path: 'products', component: CsProductsComponent },
-      { path: 'services', component: CsServicesComponent }
+      { path: 'services', component: CsServicesComponent },
+      { path: 'gallery', component: CsGalleryComponent }
     ]
  },
   { path: 'admin-login', component: SsAdminlayoutComponent,

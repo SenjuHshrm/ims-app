@@ -17,13 +17,20 @@
 }
 
 .accName {
-  font-size: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.subt {
+  font-size: 17px;
 }
 
 .centerTxt {
   display: flex;
+  flex-flow: column;
   align-items: center;
   justify-content: center;
+  word-wrap: break-word;
 }
 
 img {

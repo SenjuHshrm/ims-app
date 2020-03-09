@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { ItemsService } from '../../services/items.service';
 import { ViewProdComponent } from '../../client/cs-products/view-prod/view-prod.component';
 import * as _ from 'lodash';
@@ -20,6 +21,8 @@ export class CsProductsComponent implements OnInit {
   public workshop: any = [];
   public searchRes: any;
   public prgLoading: boolean = true
+
+  @ViewChild(MatPaginator) bikesPage: MatPaginator
 
   bikesOpt: string;
   accsOpt: string;
@@ -42,6 +45,7 @@ export class CsProductsComponent implements OnInit {
         switch(arr.product) {
           case 'Bikes':
             this.bikes.push(arr)
+            // this.bikes.paginator = this.bikesPage
             break;
           case 'Accessories':
             this.accessories.push(arr)

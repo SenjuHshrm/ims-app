@@ -5,7 +5,8 @@
       [opened]="!(isHandset$ | async)">
       <div class='centerTxt'><img src='../assets/logo.png' class='navImg'></div>
       <mat-toolbar class='centerTxt'>
-        <p class='accName'>{{ acctName }}</p>
+        <span class='accName'>{{ acctName }}</span>
+        <span class='subt'>{{ getUserAccessLvl() }}</span>
       </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item *ngIf='checkAcctType2()' routerLink='dashboard'><mat-icon>dashboard</mat-icon>&nbsp;&nbsp;Dashboard</a>

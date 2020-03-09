@@ -62,6 +62,8 @@ import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item
 import { FeatImgViewComponent } from './client/cs-home/feat-img-view/feat-img-view.component';
 import { CsFooterComponent } from './client/cs-footer/cs-footer.component';
 import { AcctListComponent } from './server/acct-list/acct-list.component';
+import { CsGalleryComponent } from './client/cs-gallery/cs-gallery.component';
+import { ViewGlimageComponent } from './client/cs-gallery/view-glimage/view-glimage.component';
 
 
 @NgModule({
@@ -93,6 +95,8 @@ import { AcctListComponent } from './server/acct-list/acct-list.component';
     FeatImgViewComponent,
     CsFooterComponent,
     AcctListComponent,
+    CsGalleryComponent,
+    ViewGlimageComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -136,7 +140,8 @@ import { AcctListComponent } from './server/acct-list/acct-list.component';
     ItemComponent,
     GenerateReportComponent,
     ViewProdComponent,
-    FeatImgViewComponent
+    FeatImgViewComponent,
+    ViewGlimageComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -71,4 +71,9 @@ export class AdminNavComponent implements OnInit{
     }
   }
 
+  getUserAccessLvl() {
+    let token: any = jwtDecode(localStorage.getItem('gpAdmin'))
+    return (token.type == 'superAdmin') ? 'Super Admin' : (token.type == 'admin') ? 'Admin' : 'Encoder'
+  }
+
 }

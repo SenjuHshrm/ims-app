@@ -64,6 +64,7 @@ import { CsFooterComponent } from './client/cs-footer/cs-footer.component';
 import { AcctListComponent } from './server/acct-list/acct-list.component';
 import { CsGalleryComponent } from './client/cs-gallery/cs-gallery.component';
 import { ViewGlimageComponent } from './client/cs-gallery/view-glimage/view-glimage.component';
+import { DeleteDialogComponent } from './server/ss-items/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -97,6 +98,7 @@ import { ViewGlimageComponent } from './client/cs-gallery/view-glimage/view-glim
     AcctListComponent,
     CsGalleryComponent,
     ViewGlimageComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -141,7 +143,8 @@ import { ViewGlimageComponent } from './client/cs-gallery/view-glimage/view-glim
     GenerateReportComponent,
     ViewProdComponent,
     FeatImgViewComponent,
-    ViewGlimageComponent
+    ViewGlimageComponent,
+    DeleteDialogComponent
   ],
   bootstrap: [AppComponent]
 })

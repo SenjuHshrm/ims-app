@@ -4,12 +4,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DefValService } from '../../services/def-val.service';
 import { ItemComponent } from '../../server/ss-items/item/item.component';
+import { DeleteDialogComponent } from '../../server/ss-items/delete-dialog/delete-dialog.component';
 import { ItemsService } from '../../services/items.service';
 import { SelectOpts } from '../../interfaces/select-opts';
 import { ItemsLs } from '../../interfaces/items-ls';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
-
+import * as jwtDecode from 'jwt-decode';
 
 var itemLs: ItemsLs[] = []
 
@@ -165,6 +166,26 @@ export class SsItemsComponent implements OnInit {
     })
   }
 
+  deleteItem(row: any) {
+    let obj = _.find(this.itemsList, { _id: row.id })
+    const md = this.mDlg.open(DeleteDialogComponent, {
+      disableClose: false,
+      data: obj,
+      panelClass: 'mat-dialog-container-custom'
+    })
+    md.afterClosed().subscribe(res => {
+      console.log(res)
+      if(res) {
+        this.itm.deleteItem(obj).subscribe(res => {
+          if(res == true) {
+            this.ngOnInit()
+            this.sBar.open('Item removed', 'OK', { duration: 2000 })
+          }
+        })
+      }
+    })
+  }
+
   toggleFeature(evt: MouseEvent, row: any) {
     evt.defaultPrevented
     console.log(row)
@@ -174,6 +195,11 @@ export class SsItemsComponent implements OnInit {
         this.sBar.open('Featured items limit is four (4)', 'OK', { duration: 2000 })
       }
     })
+  }
+
+  checkAccessLevel() {
+    let token: any = jwtDecode(localStorage.getItem('gpAdmin'));
+    return (token.type == 'encoder') ? true : false;
   }
 
 }

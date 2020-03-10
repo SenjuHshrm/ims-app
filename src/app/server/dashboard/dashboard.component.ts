@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { SelectOpts } from '../../interfaces/select-opts';
 import { GenerateReportService } from '../../services/generate-report.service';
 import { CurrencyFormatService } from '../../services/currency-format.service';
+import { AuthService } from '../../services/auth.service';
 import { DefValService } from '../../services/def-val.service';
+import { ItemsService } from '../../services/items.service';
 import { Chart } from 'chart.js';
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -14,7 +16,9 @@ import * as moment from 'moment';
 })
 export class DashboardComponent implements OnInit {
 
-  public monthIncome: any;
+  public allProd: any = [];
+  public monthIncome: any = [];
+  public monthLoss: any = [];
   public products: SelectOpts[] = [
     { value: 'Bikes', viewVal: 'Bikes' },
     { value: 'Accessories', viewVal: 'Accessories' },
@@ -25,18 +29,26 @@ export class DashboardComponent implements OnInit {
   @ViewChild('inbChart') inbChart: ElementRef;
   @ViewChild('outbChart') outbChart: ElementRef;
   @ViewChild('income') income: ElementRef;
+  @ViewChild('itemCount') itemCount: ElementRef;
+
   public vals: any;
   public logs: any;
   public iprod: string;
   public oprod: string;
   public recChart: any;
   public soldChart: any;
-  public mnIncm: any
+  public mnIncm: any;
+  public itmCnt: any;
+  public visitCount: string;
+  public itemSold: string;
+  public itemRecv: string;
 
   constructor(
     private defVals: DefValService,
     private log: GenerateReportService,
-    private crrForm: CurrencyFormatService
+    private crrForm: CurrencyFormatService,
+    private itm: ItemsService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -48,12 +60,100 @@ export class DashboardComponent implements OnInit {
         this.logs = res;
         this.initInbound()
         this.initOutbound()
+        this.getDailySales()
       })
     })
     this.log.getMonthlyIncome().subscribe(res => {
-      this.monthIncome = res
+      this.monthIncome = res.respIncm
+      this.monthLoss = res.respLoss
       this.initMonthIncome()
     })
+    this.itm.getAllProd().subscribe(res => {
+      this.allProd = res
+      this.initItemCount()
+    })
+    this.auth.getVisitors().subscribe(res => {
+      this.visitCount = res.length.toString()
+    })
+
+  }
+
+  getDailySales() {
+    let sdate = new Date(new Date(new Date()).setHours(0, 0, 0))
+    let edate = new Date(new Date(new Date()).setHours(23, 59, 59))
+    let sold = 0;
+    let recv = 0;
+    console.log(sdate)
+    console.log(edate)
+    let obj = _.filter(this.logs, (x) => {
+      return new Date(x.createdAt) > sdate && new Date(x.createdAt) < edate
+    })
+    _.forEach(obj, arr => {
+      switch(arr.type) {
+        case 'out':
+          sold += arr.sold
+          break;
+        case 'in':
+          recv += arr.received
+          break
+      }
+    })
+    this.itemRecv = recv.toString()
+    this.itemSold = sold.toString()
+  }
+
+  initItemCount() {
+    let labelsLs: string[] = [],
+        itemAmt: number[] = [],
+        brdrColor: string[] = [],
+        bgColor: string[] = [];
+    Object.keys(this.vals).forEach(key => {
+      if(key != '_id') {
+        labelsLs.push(key)
+      }
+    })
+    for(let i = 0; i < labelsLs.length; i++) {
+      let cnt = 0
+      let color = this.randomizeColor()
+      _.forEach(this.allProd, arr => {
+        if(arr.product == labelsLs[i]) {
+          cnt += arr.itemCount
+        }
+      })
+      itemAmt.push(cnt)
+      brdrColor.push(color + 'FF')
+      bgColor.push(color + '33')
+    }
+    this.itmCnt = new Chart(this.itemCount.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: labelsLs,
+        datasets: [{
+          data: itemAmt,
+          backgroundColor: bgColor,
+          borderColor: brdrColor,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Items currently in store',
+          position: 'bottom'
+        },
+        legend: {
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    })
+    this.itmCnt.render()
   }
 
   initInbound() {
@@ -220,21 +320,30 @@ export class DashboardComponent implements OnInit {
   initMonthIncome() {
     //#388e3c
     let labelsLs: string[] = []
-    let amt = [], bgColor = [], brdr = []
+    let amtGain = [], bgColorG = [], brdrG = [], amtLoss = []
     Object.keys(this.monthIncome).forEach(key => {
       labelsLs.push(key)
-      amt.push(this.monthIncome[key])
-      bgColor.push('#388E3C33')
-      brdr.push('#388E3CFF')
+      amtGain.push(this.monthIncome[key])
+      amtLoss.push(this.monthLoss[key])
+      // bgColor.push('#388E3C33')
+      // brdr.push('#388E3CFF')
     })
     this.mnIncm = new Chart(this.income.nativeElement, {
       type: 'line',
       data: {
         labels: labelsLs,
         datasets: [{
+          label: 'Gain',
           backgroundColor: '#FFFFFF00',
-          data: amt,
+          data: amtGain,
           borderColor: '#388E3CFF',
+          borderWidth: 1,
+          lineTension: 0
+        }, {
+          label: 'Loss',
+          backgroundColor: '#FFFFFF00',
+          data: amtLoss,
+          borderColor: '#F44336FF',
           borderWidth: 1,
           lineTension: 0
         }]
@@ -244,9 +353,6 @@ export class DashboardComponent implements OnInit {
           display: true,
           text: 'Annual Income',
           position: 'bottom'
-        },
-        legend: {
-          display: false
         },
         scales: {
           yAxes: [{

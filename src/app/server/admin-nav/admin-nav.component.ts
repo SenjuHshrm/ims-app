@@ -39,7 +39,7 @@ export class AdminNavComponent implements OnInit{
   }
 
   logOut() {
-    localStorage.clear();
+    localStorage.removeItem('gpAdmin');
     this.router.navigate(['/admin-login'])
   }
 

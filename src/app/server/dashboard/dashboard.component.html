@@ -6,45 +6,94 @@
         <mat-card-title>Dashboard</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div class='container' fxLayout fxLayout.xs='column' fxLayout.sm='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
-          <div class='item item-1' fxFlex='50%'>
-            <div class='container' fxLayout fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
-              <div class='item item-1' fxFlex='50%'>
-                <canvas #inbChart style='width:50%; height:70%'></canvas>
-              </div>
-              <div class='item item-2' fxFlex='50%'>
-                <mat-form-field>
-                  <mat-label>Select received products</mat-label>
-                  <mat-select [(ngModel)]='iprod' name='iproduct'>
-                    <mat-option *ngFor='let prod of products' [value]='prod.value' (click)='changeInbound()'>{{ prod.viewVal }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout.sm='column' fxLayout.md='row' fxLayout='row' fxLayoutAlign='left center' fxLayoutGap='20px' style='margin-bottom: 10px'>
+          <div class='item item-1' fxFlex='30%'>
+            <mat-card class='mat-elevation-z8'>
+              <mat-card-header>
+                <mat-card-title>Website Visitors</mat-card-title>
+              </mat-card-header>
+              <mat-card-content style='text-align: center'>
+                <p style='font-weight: bolder; font-size: 35px'>{{ visitCount }}</p>
+              </mat-card-content>
+            </mat-card>
           </div>
-          <div class='item item-2' fxFlex='50%'>
-            <div class='container' fxLayout fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
-              <div class='item item-1' fxFlex='100%'>
-                <canvas #outbChart style='width:50%; height:70%'></canvas>
-              </div>
-              <div class='item item-2' fxFlex='50%'>
-                <mat-form-field>
-                  <mat-label>Select sold products</mat-label>
-                  <mat-select [(ngModel)]='oprod' name='oproduct'>
-                    <mat-option *ngFor='let prod of products' [value]='prod.value' (click)='changeOutbound()'>{{ prod.viewVal }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
+          <div class='item item-2' fxFlex='30%'>
+            <mat-card class='mat-elevation-z8'>
+              <mat-card-header>
+                <mat-card-title>Items sold</mat-card-title>
+              </mat-card-header>
+              <mat-card-content style='text-align: center'>
+                <p style='font-weight: bolder; font-size: 35px'>{{ itemSold }}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class='item item-3' fxFlex='30%'>
+            <mat-card class='mat-elevation-z8'>
+              <mat-card-header>
+                <mat-card-title>Items received</mat-card-title>
+              </mat-card-header>
+              <mat-card-content style='text-align: center'>
+                <p style='font-weight: bolder; font-size: 35px'>{{ itemRecv }}</p>
+              </mat-card-content>
+            </mat-card>
           </div>
         </div>
-        <div class='container' fxLayout fxLayout.xs='column' fxLayout.sm='column' fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
-          <div clas='item item-1' fxFLex='100%'>
-            <div class='container' fxLayout fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
-              <div class='item item-1' fxFlex='100%'>
-                <canvas #income style='width:50%; height:70%'></canvas>
-              </div>
-            </div>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout.sm='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-bottom: 10px'>
+          <div class='item item-1' fxFlex='50%'>
+            <mat-card class='mat-elevation-z8'>
+              <mat-card-content>
+                <div class='container' fxLayout fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
+                  <div class='item item-1' fxFlex='50%'>
+                    <canvas #inbChart style='width:50%; height:70%'></canvas>
+                  </div>
+                  <div class='item item-2' fxFlex='50%'>
+                    <mat-form-field>
+                      <mat-label>Select received products</mat-label>
+                      <mat-select [(ngModel)]='iprod' name='iproduct'>
+                        <mat-option *ngFor='let prod of products' [value]='prod.value' (click)='changeInbound()'>{{ prod.viewVal }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <div class='item item-2' fxFlex='50%'>
+            <mat-card class='mat-elevation-z8'>
+              <mat-card-content>
+                <div class='container' fxLayout fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px'>
+                  <div class='item item-1' fxFlex='100%'>
+                    <canvas #outbChart style='width:50%; height:70%'></canvas>
+                  </div>
+                  <div class='item item-2' fxFlex='50%'>
+                    <mat-form-field>
+                      <mat-label>Select sold products</mat-label>
+                      <mat-select [(ngModel)]='oprod' name='oproduct'>
+                        <mat-option *ngFor='let prod of products' [value]='prod.value' (click)='changeOutbound()'>{{ prod.viewVal }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <div class='container' fxLayout fxLayout.xs='row' fxLayout.sm='column' fxLayout='row' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-bottom: 10px'>
+          <div clas='item item-1' fxFlex='100%'>
+            <mat-card class='mat-elevation-z8'>
+              <mat-card-content>
+                <canvas #itemCount style='width:50%; height:70%'></canvas>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout.sm='column' fxLayout='column' fxLayoutAlign='center' fxLayoutGap.xs='20px' style='margin-bottom: 10px'>
+          <div clas='item item-1' fxFlex='100%'>
+            <mat-card class='mat-elevation-z8'>
+              <mat-card-content>
+                <canvas #income style='width:100%; height:350px'></canvas>
+              </mat-card-content>
+            </mat-card>
           </div>
         </div>
       </mat-card-content>

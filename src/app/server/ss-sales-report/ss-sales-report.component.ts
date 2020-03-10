@@ -37,6 +37,7 @@ export class SsSalesReportComponent implements OnInit {
         obj.dateTo == '') {
       this.sBar.open('Please complete details', 'OK', { duration: 2000 })
     } else {
+      console.log(obj)
       this.gRep.generate(obj).subscribe(res => {
         this.md.open(GenerateReportComponent, {
           disableClose: true,

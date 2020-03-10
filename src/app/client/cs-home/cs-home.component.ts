@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ItemsService } from '../../services/items.service';
+import { AuthService } from '../../services/auth.service';
 import { FeatImgViewComponent } from '../../client/cs-home/feat-img-view/feat-img-view.component';
 import { MatDialog } from '@angular/material';
 // import { MatCarousel, MatCarouselComponent } from '@ngmodule/material-carousel';
@@ -38,7 +39,8 @@ export class CsHomeComponent implements OnInit, AfterViewInit {
 
   constructor(
     private itm: ItemsService,
-    private md: MatDialog
+    private md: MatDialog,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -47,6 +49,11 @@ export class CsHomeComponent implements OnInit, AfterViewInit {
       this.featProd = res
       console.log(this.featProd)
     })
+    if(!localStorage.getItem('_SESSION')) {
+      this.auth.requestSessionId().subscribe(res => {
+        localStorage.setItem('_SESSION', res)
+      })
+    }
   }
 
   ngAfterViewInit() {

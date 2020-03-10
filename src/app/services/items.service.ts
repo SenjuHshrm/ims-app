@@ -55,4 +55,8 @@ export class ItemsService {
     return this.http.get(Config.api + '/api/get-feat', this.constructHeader())
   }
 
+  deleteItem(data) {
+    return this.http.post(Config.api + '/api/delete-item', data,  this.constructHeader())
+  }
+
 }

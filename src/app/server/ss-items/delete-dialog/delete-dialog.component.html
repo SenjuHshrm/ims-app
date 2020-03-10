@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Delete Item
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Are you sure you want to delete this item?</p>
+    <div class='container' fxLayout fxLayout.xs='row' fxLayout='row' fxLayoutAlign='left'>
+      <div class='item item-1' fxFlex='49%'>
+        <div class='dlgImg'>
+          <img [src]='"data:image/png;jpg;jpeg;base64," + itemInf.img | imageData' width='100%' height='100%'>
+        </div>
+      </div>
+      <div class='item item-2' fxFlex='2%'></div>
+      <div class='item item-2' fxFlex='49%'>
+        <p><b>{{ itemInf.name }}</b></p>
+        <p>₱ {{ itemInf.price }}</p>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions fxLayoutAlign='center center'>
+    <button mat-raised-button [mat-dialog-close]='true' color='primary'>Yes</button>
+    <button mat-raised-button [mat-dialog-close]='false' color='warn'>No</button>
+  </mat-card-actions>
+</mat-card>

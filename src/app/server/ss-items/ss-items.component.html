@@ -60,11 +60,14 @@
                   </ng-container>
                   <ng-container matColumnDef='feature'>
                     <th mat-header-cell *matHeaderCellDef>Feature to Site</th>
-                    <td mat-cell *matCellDef='let data'><mat-checkbox [(ngModel)]='data.feature' (change)='toggleFeature($event, data)' name='data.name'></mat-checkbox></td>
+                    <td mat-cell *matCellDef='let data'><mat-checkbox [(ngModel)]='data.feature' (change)='toggleFeature($event, data)' name='data.name' [disabled]='checkAccessLevel()'></mat-checkbox></td>
                   </ng-container>
                   <ng-container matColumnDef='action'>
-                    <th mat-header-cell *matHeaderCellDef>Update Item</th>
-                    <td mat-cell *matCellDef='let data'><button mat-button (click)="updateItem(data)"><mat-icon>update</mat-icon></button></td>
+                    <th mat-header-cell *matHeaderCellDef>Actions</th>
+                    <td mat-cell *matCellDef='let data'>
+                      <button matTooltip='Update item' matTooltipPosition='above' mat-button (click)="updateItem(data)" [disabled]='checkAccessLevel()' color='accent'><mat-icon>update</mat-icon></button>
+                      <button matTooltip='Delete item' matTooltipPosition='above' mat-button (click)="deleteItem(data)" [disabled]='checkAccessLevel()' color='warn'><mat-icon>delete_outline</mat-icon></button>
+                    </td>
                   </ng-container>
                   <tr mat-header-row *matHeaderRowDef='tableHeader'></tr>
                   <tr mat-row *matRowDef='let row; columns: tableHeader'></tr>

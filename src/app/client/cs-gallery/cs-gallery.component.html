@@ -6,8 +6,9 @@
       </mat-card-header>
       <mat-card-content>
         <div class='container' fxLayout fxLayout='row wrap' fxLayoutAlign='center center' fxLayoutGap.xs='3px' fxLayoutGap.sm='5px' fxLayoutGap.md='8px' fxLayoutGap='10px'>
+          <div *ngIf='gallImg.length == 0'>No photos.</div>
           <div class='item item-1 imgThumb' fxFlex='20%' *ngFor='let img of gallImg' fxLayoutAlign='center'>
-            <img [src]='img.image' class='img' (click)='viewImg(img.image)' style='margin-bottom: 3px'>
+            <img [src]='"data:image/png;jpg;jpeg;base64," + img.image | imageData' class='img' (click)='viewImg(img.image)' style='margin-bottom: 3px'>
           </div>
         </div>
       </mat-card-content>

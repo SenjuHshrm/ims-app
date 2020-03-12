@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import * as jwtDecode from 'jwt-decode';
 @Component({
   selector: 'app-ss-panel-layout',
   templateUrl: './ss-panel-layout.component.html',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SsPanelLayoutComponent implements OnInit {
 
-  constructor() {
+  constructor(private route: ActivatedRoute, private router: Router) {
     if(!localStorage.getItem('gpAdmin')) {
-      window.location.href = '/admin-login'
+      this.router.navigate(['/admin-login'])
+    } else {
+      let token: any = jwtDecode(localStorage.getItem('gpAdmin'))
+      if(this.route.snapshot.params['username'] != token.username) {
+        this.router.navigate(['/logout'])
+      }
     }
   }
 

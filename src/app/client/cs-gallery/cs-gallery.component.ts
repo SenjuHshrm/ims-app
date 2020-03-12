@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewGlimageComponent } from '../../client/cs-gallery/view-glimage/view-glimage.component';
 import { MatDialog } from '@angular/material';
+import { PhotosService } from '../../services/photos.service';
 
 @Component({
   selector: 'app-gallery',
@@ -9,21 +10,17 @@ import { MatDialog } from '@angular/material';
 })
 export class CsGalleryComponent implements OnInit {
 
-  public gallImg: any = [
-    { image: '../../assets/gallery/1.jpg' },
-    { image: '../../assets/gallery/2.jpg' },
-    { image: '../../assets/gallery/3.jpg' },
-    { image: '../../assets/gallery/4.jpg' },
-    { image: '../../assets/gallery/5.jpg' },
-    { image: '../../assets/gallery/6.jpg' },
-    { image: '../../assets/gallery/7.jpg' },
-  ]
+  public gallImg: any = []
 
   constructor(
-    private mDialog: MatDialog
+    private mDialog: MatDialog,
+    private pht: PhotosService
   ) { }
 
   ngOnInit() {
+    this.pht.getPhotoLs().subscribe(res => {
+      this.gallImg = res
+    })
   }
 
   viewImg(img: string) {

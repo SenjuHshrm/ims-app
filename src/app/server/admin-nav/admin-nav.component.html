@@ -9,11 +9,9 @@
         <span class='subt'>{{ getUserAccessLvl() }}</span>
       </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item *ngIf='checkAcctType2()' routerLink='dashboard'><mat-icon>dashboard</mat-icon>&nbsp;&nbsp;Dashboard</a>
-      <a mat-list-item *ngFor='let ls of navLs' routerLink='{{ ls.path }}'><mat-icon>{{ ls.ic }}</mat-icon>&nbsp;&nbsp;{{ ls.name }}</a>
-      <a mat-list-item *ngIf='checkAcctType()' routerLink='add-acct'><mat-icon>person_add</mat-icon>&nbsp;&nbsp;Add Account</a>
-      <a mat-list-item *ngIf='checkAcctType()' routerLink='acct-list'><mat-icon>people_outline</mat-icon>&nbsp;&nbsp;Account List</a>
-      <a mat-list-item (click)='logOut()'><mat-icon>power_settings_new</mat-icon>&nbsp;&nbsp;Logout</a>
+      <div *ngFor='let ls of navLs'>
+        <a mat-list-item routerLink='{{ ls.path }}' *ngIf='checkAcctType(ls.role)'><mat-icon>{{ ls.ic }}</mat-icon>&nbsp;&nbsp;{{ ls.name }}</a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -20,6 +20,8 @@ import { SsAddSalesComponent } from './server/ss-add-sales/ss-add-sales.componen
 import { SsReceiveItemComponent } from './server/ss-receive-item/ss-receive-item.component';
 import { AcctListComponent } from './server/acct-list/acct-list.component';
 import { CsGalleryComponent } from './client/cs-gallery/cs-gallery.component';
+import { LogoutComponent } from './server/logout/logout.component';
+import { AddPhotoComponent } from './server/add-photo/add-photo.component';
 
 const routes: Routes = [
   { path: '', component: CsSiteLayoutComponent,
@@ -42,11 +44,13 @@ const routes: Routes = [
       { path: 'sales', component: SsDailySalesComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
       { path: 'sales/add', component: SsAddSalesComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
       { path: 'sales/receive', component: SsReceiveItemComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
-      { path: 'report', component: SsSalesReportComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
+      { path: 'report', component: SsSalesReportComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin'] } },
       { path: 'add-acct', component: SsAddAcctComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin'] } },
       { path: 'acct-setting', component: UpdateAcctInfoComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
-      { path: 'acct-list', component: AcctListComponent, canActivate:[CanActivateRouteGuard], data: { roles: ['superAdmin'] } }
+      { path: 'acct-list', component: AcctListComponent, canActivate:[CanActivateRouteGuard], data: { roles: ['superAdmin'] } },
+      { path: 'add-photo', component: AddPhotoComponent, canActivate:[CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin'] } }
   ]},
+  { path: 'logout', component: LogoutComponent },
   { path: '**', redirectTo: 'path/404' },
   { path: 'path/404', component: NotFoundComponent }
 ];

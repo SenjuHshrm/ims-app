@@ -65,6 +65,9 @@ import { AcctListComponent } from './server/acct-list/acct-list.component';
 import { CsGalleryComponent } from './client/cs-gallery/cs-gallery.component';
 import { ViewGlimageComponent } from './client/cs-gallery/view-glimage/view-glimage.component';
 import { DeleteDialogComponent } from './server/ss-items/delete-dialog/delete-dialog.component';
+import { LogoutComponent } from './server/logout/logout.component';
+import { AddPhotoComponent } from './server/add-photo/add-photo.component';
+import { DeleteImgComponent } from './server/add-photo/delete-img/delete-img.component';
 
 
 @NgModule({
@@ -99,6 +102,9 @@ import { DeleteDialogComponent } from './server/ss-items/delete-dialog/delete-di
     CsGalleryComponent,
     ViewGlimageComponent,
     DeleteDialogComponent,
+    LogoutComponent,
+    AddPhotoComponent,
+    DeleteImgComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -144,7 +150,8 @@ import { DeleteDialogComponent } from './server/ss-items/delete-dialog/delete-di
     ViewProdComponent,
     FeatImgViewComponent,
     ViewGlimageComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    DeleteImgComponent
   ],
   bootstrap: [AppComponent]
 })

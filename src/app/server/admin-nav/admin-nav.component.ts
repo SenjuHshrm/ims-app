@@ -14,11 +14,15 @@ import { map, filter, withLatestFrom } from 'rxjs/operators';
 export class AdminNavComponent implements OnInit{
   @ViewChild('drawer') drawer: MatSidenav
   public navLs: any = [
-    // { path: 'dashboard', name: 'Dashboard', ic: 'dashboard' },
-    { path: 'items', name: 'Items', ic: 'storage' },
-    { path: 'sales', name: 'Daily Sales', ic: 'trending_up' },
-    { path: 'report', name: 'Sales report', ic: 'poll' },
-    { path: 'acct-setting', name: 'Update Account', ic: 'person_outline' }
+    { path: 'dashboard', name: 'Dashboard', ic: 'dashboard', role: ['superAdmin', 'admin'] },
+    { path: 'items', name: 'Items', ic: 'storage', role: ['superAdmin', 'admin', 'encoder'] },
+    { path: 'sales', name: 'Daily Sales', ic: 'trending_up', role: ['superAdmin', 'admin', 'encoder'] },
+    { path: 'report', name: 'Sales report', ic: 'poll', role: ['superAdmin', 'admin'] },
+    { path: 'acct-setting', name: 'Update Account', ic: 'person_outline', role: ['superAdmin', 'admin', 'encoder'] },
+    { path: 'add-acct', name: 'Add Account', ic: 'person_add', role: ['superAdmin'] },
+    { path: 'acct-list', name: 'Account List', ic: 'people_outline', role: ['superAdmin'] },
+    { path: 'add-photo', name: 'Photos', ic: 'image', role: ['superAdmin', 'admin'] },
+    { path: '/logout', name: 'Logout', ic: 'power_settings_new', role: ['superAdmin', 'admin', 'encoder'] }
   ]
   public acctName: string;
 
@@ -34,32 +38,10 @@ export class AdminNavComponent implements OnInit{
     ).subscribe(_ => this.drawer.close())
   }
 
-  loggedIn() {
-    return (localStorage.getItem('gpAdmin')) ? true : false;
-  }
-
-  logOut() {
-    localStorage.removeItem('gpAdmin');
-    this.router.navigate(['/admin-login'])
-  }
-
-  checkAcctType() {
+  checkAcctType(arr: Array<string>) {
     let token: any = jwtDecode(localStorage.getItem('gpAdmin'));
-    return (token.type == 'superAdmin') ? true : false;
-  }
-
-  checkAcctType2() {
-    let token: any = jwtDecode(localStorage.getItem('gpAdmin'));
-    return (token.type == 'superAdmin' || token.type == 'admin') ? true : false;
-  }
-
-  getUsername() {
-    if(localStorage.getItem('gpAdmin')) {
-      let token: any = jwtDecode(localStorage.getItem('gpAdmin'))
-      return token.username;
-    } else {
-      return '';
-    }
+    let x = arr.indexOf(token.type)
+    return (x != -1) ? true : false
   }
 
   ngOnInit() {

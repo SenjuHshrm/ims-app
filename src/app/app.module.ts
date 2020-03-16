@@ -30,6 +30,7 @@ import {
   MatSlideToggleModule,
   MatProgressBarModule,
   MatTooltipModule } from '@angular/material';
+import { FacebookModule } from 'ngx-facebook';
 import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
 import { AuthService } from './services/auth.service'
 
@@ -138,7 +139,8 @@ import { DeleteImgComponent } from './server/add-photo/delete-img/delete-img.com
     MatProgressSpinnerModule,
     MatSlideToggleModule,
     MatProgressBarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FacebookModule.forRoot()
   ],
   providers: [
     CanActivateRouteGuard,

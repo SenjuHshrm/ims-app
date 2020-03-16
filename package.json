@@ -38,6 +38,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "ngx-facebook": "^2.4.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "written-number": "^0.9.1",

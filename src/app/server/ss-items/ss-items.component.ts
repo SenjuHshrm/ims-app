@@ -27,6 +27,7 @@ export class SsItemsComponent implements OnInit {
   public itemsList: any = [];
   public searchParam: any;
   public defVals: any;
+  public showItemsVal: string;
   public subCat: SelectOpts[] = [];
   public tableHeader: string[] = ['name', 'img', 'color', 'price', 'itemCount', 'availability', 'feature', 'action']
   public products: SelectOpts[] = [
@@ -35,6 +36,12 @@ export class SsItemsComponent implements OnInit {
     { value: 'Wheels', viewVal: 'Wheels' },
     { value: 'Components', viewVal: 'Components' },
     { value: 'Workshop', viewVal: 'Workshop' }
+  ]
+  public showItems: SelectOpts[] = [
+    { value: 'Show All', viewVal: 'Show All' },
+    { value: 'Available', viewVal: 'Available' },
+    { value: 'Not Available', viewVal: 'Not Available' },
+    { value: 'Five Below', viewVal: 'Five Below' }
   ]
 
   constructor(
@@ -200,6 +207,83 @@ export class SsItemsComponent implements OnInit {
   checkAccessLevel() {
     let token: any = jwtDecode(localStorage.getItem('gpAdmin'));
     return (token.type == 'encoder') ? true : false;
+  }
+
+  showItemsBy(str: string) {
+    if(this.itemsList.length > 0) {
+      let newLs: ItemsLs[] = [];
+      switch(str) {
+        case "Available":
+          _.forEach(this.itemsList, arr => {
+            if(arr.isAvailable) {
+              newLs.push({
+                id: arr._id,
+                name: arr.name,
+                img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
+                color: arr.color,
+                price: '₱ ' + arr.price,
+                itemCount: arr.itemCount,
+                availability: arr.isAvailable,
+                feature: arr.featureToSite
+              })
+            }
+          })
+          this.itemsTable = new MatTableDataSource(newLs)
+          this.itemsTable.paginator = this.paginator
+          break;
+        case "Not Available":
+          _.forEach(this.itemsList, arr => {
+            if(!arr.isAvailable) {
+              newLs.push({
+                id: arr._id,
+                name: arr.name,
+                img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
+                color: arr.color,
+                price: '₱ ' + arr.price,
+                itemCount: arr.itemCount,
+                availability: arr.isAvailable,
+                feature: arr.featureToSite
+              })
+            }
+          })
+          this.itemsTable = new MatTableDataSource(newLs)
+          this.itemsTable.paginator = this.paginator
+          break;
+        case "Five Below":
+          _.forEach(this.itemsList, arr => {
+            if(arr.itemCount <= 5 && arr.itemCount > 0) {
+              newLs.push({
+                id: arr._id,
+                name: arr.name,
+                img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
+                color: arr.color,
+                price: '₱ ' + arr.price,
+                itemCount: arr.itemCount,
+                availability: arr.isAvailable,
+                feature: arr.featureToSite
+              })
+            }
+          })
+          this.itemsTable = new MatTableDataSource(newLs)
+          this.itemsTable.paginator = this.paginator
+          break;
+        default:
+          _.forEach(this.itemsList, arr => {
+            newLs.push({
+              id: arr._id,
+              name: arr.name,
+              img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
+              color: arr.color,
+              price: '₱ ' + arr.price,
+              itemCount: arr.itemCount,
+              availability: arr.isAvailable,
+              feature: arr.featureToSite
+            })
+          })
+          this.itemsTable = new MatTableDataSource(newLs)
+          this.itemsTable.paginator = this.paginator
+      }
+    }
   }
 
 }

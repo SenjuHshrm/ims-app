@@ -30,6 +30,16 @@
             </div>
           </div>
           <div class='item item-3' fxFlex='100%'>
+            <div class='container' fxLayout fxLayout.xs='column' fxLayout='row' fxLayoutAlign='left' fxLayoutGap='20px'>
+              <mat-form-field class='item item-1' fxFlex='30%'>
+                <mat-label>Show items</mat-label>
+                <mat-select [(ngModel)]='showItemsVal' name='showItems'>
+                  <mat-option *ngFor='let showItm of showItems' [value]='showItm.value' (click)='showItemsBy(showItemsVal)'>{{ showItm.viewVal }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class='item item-4' fxFlex='100%'>
             <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='center' fxLayoutGap='20px'>
               <div class='item item-1 table-con' fxFlex='100%'>
                 <mat-paginator [pageSizeOptions]='[5, 10, 20]' showFirstLastButtons></mat-paginator>

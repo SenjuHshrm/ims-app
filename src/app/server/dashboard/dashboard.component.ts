@@ -333,14 +333,14 @@ export class DashboardComponent implements OnInit {
       data: {
         labels: labelsLs,
         datasets: [{
-          label: 'Gain',
+          label: 'Profit',
           backgroundColor: '#FFFFFF00',
           data: amtGain,
           borderColor: '#388E3CFF',
           borderWidth: 1,
           lineTension: 0
         }, {
-          label: 'Loss',
+          label: 'Consumption',
           backgroundColor: '#FFFFFF00',
           data: amtLoss,
           borderColor: '#F44336FF',

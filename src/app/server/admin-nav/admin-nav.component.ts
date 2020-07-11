@@ -16,8 +16,8 @@ export class AdminNavComponent implements OnInit{
   public navLs: any = [
     { path: 'dashboard', name: 'Dashboard', ic: 'dashboard', role: ['superAdmin', 'admin'] },
     { path: 'items', name: 'Items', ic: 'storage', role: ['superAdmin', 'admin', 'encoder'] },
-    { path: 'sales', name: 'Daily Sales', ic: 'trending_up', role: ['superAdmin', 'admin', 'encoder'] },
-    { path: 'report', name: 'Sales report', ic: 'poll', role: ['superAdmin', 'admin'] },
+    { path: 'sales', name: 'Manage Sales', ic: 'trending_up', role: ['superAdmin', 'admin', 'encoder'] },
+    { path: 'report', name: 'Consolidation', ic: 'poll', role: ['superAdmin', 'admin'] },
     { path: 'acct-setting', name: 'Update Account', ic: 'person_outline', role: ['superAdmin', 'admin', 'encoder'] },
     { path: 'add-acct', name: 'Add Account', ic: 'person_add', role: ['superAdmin'] },
     { path: 'acct-list', name: 'Account List', ic: 'people_outline', role: ['superAdmin'] },

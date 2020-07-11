@@ -12,8 +12,8 @@ import { GenerateReportComponent } from '../../server/ss-sales-report/generate-r
 export class SsSalesReportComponent implements OnInit {
 
   public salesOpts: SelectOpts[] = [
-    { value: 'in', viewVal: 'Inbound' },
-    { value: 'out', viewVal: 'Outbound' },
+    { value: 'in', viewVal: 'Consumption' },
+    { value: 'out', viewVal: 'Profit' },
   ]
   public inf: any;
 

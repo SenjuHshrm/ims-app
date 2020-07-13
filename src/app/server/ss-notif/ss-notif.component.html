@@ -1,0 +1,25 @@
+<div class='container' fxLayout fxLayout.xs='column' fxLayoutAlign='center' style='margin-top: 30px'>
+  <div class='item item-1' fxFlex='5%'></div>
+  <div class='item item-2' fxFlex='90%'>
+    <mat-card class='mat-elevation-z8'>
+      <mat-card-header>
+        <mat-card-title>Notifications</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <button mat-raised-button color='warn' (click)='deleteNotifs()'><mat-icon>delete_outline</mat-icon>Delete all</button>
+      </mat-card-content>
+      <mat-card-content>
+        <div class='container' fxLayout fxLayout.xs='column' fxLayout='column' fxLayoutAlign='center' fxLayoutGap='20px' style='margin-top: 20px'>
+          <div class='item item-1' fxFlex='5%'></div>
+          <div class='item item-2 notif-con mat-elevation-z8' *ngFor='let cont of notifLs.slice().reverse()' fxFlex='90%'>
+            <p><b>{{ cont.title }}</b></p>
+            <p>{{ cont.content }}</p>
+            <span>{{ cont.date }}</span>
+          </div>
+          <div class='item item-3' fxFlex='5%'></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class='item item-3' fxFlex='5%'></div>
+</div>

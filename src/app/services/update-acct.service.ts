@@ -20,4 +20,34 @@ export class UpdateAcctService {
     return this.http.post(Config.api + '/api/update', data, headers)
   }
 
+  closeNotif(data: any) {
+    let headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('gpAdmin')
+      })
+    }
+    return this.http.post(Config.api + '/api/close-notif', data, headers)
+  }
+
+  getNotifs(data: any) {
+    let headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('gpAdmin')
+      })
+    }
+    return this.http.get(Config.api + '/api/get-notifs/' + data.username, headers)
+  }
+
+  deleteNotif(data: any) {
+    let headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('gpAdmin')
+      })
+    }
+    return this.http.post(Config.api + '/api/delete-notifs', data, headers)
+  }
+
 }

@@ -29,7 +29,8 @@ import {
   MatProgressSpinnerModule,
   MatSlideToggleModule,
   MatProgressBarModule,
-  MatTooltipModule } from '@angular/material';
+  MatTooltipModule,
+  MatBadgeModule } from '@angular/material';
 import { FacebookModule } from 'ngx-facebook';
 import { CanActivateRouteGuard } from './guard/can-activate-route.guard';
 import { AuthService } from './services/auth.service'
@@ -69,6 +70,7 @@ import { DeleteDialogComponent } from './server/ss-items/delete-dialog/delete-di
 import { LogoutComponent } from './server/logout/logout.component';
 import { AddPhotoComponent } from './server/add-photo/add-photo.component';
 import { DeleteImgComponent } from './server/add-photo/delete-img/delete-img.component';
+import { SsNotifComponent } from './server/ss-notif/ss-notif.component';
 
 
 @NgModule({
@@ -105,7 +107,8 @@ import { DeleteImgComponent } from './server/add-photo/delete-img/delete-img.com
     DeleteDialogComponent,
     LogoutComponent,
     AddPhotoComponent,
-    DeleteImgComponent
+    DeleteImgComponent,
+    SsNotifComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -140,6 +143,7 @@ import { DeleteImgComponent } from './server/add-photo/delete-img/delete-img.com
     MatSlideToggleModule,
     MatProgressBarModule,
     MatTooltipModule,
+    MatBadgeModule,
     FacebookModule.forRoot()
   ],
   providers: [

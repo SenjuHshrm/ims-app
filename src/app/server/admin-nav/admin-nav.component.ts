@@ -5,6 +5,8 @@ import { MatSidenav } from '@angular/material'
 import { Observable } from 'rxjs';
 import * as jwtDecode from 'jwt-decode';
 import { map, filter, withLatestFrom } from 'rxjs/operators';
+import { WebsocketService } from '../../services/websocket.service';
+import { UpdateAcctService } from '../../services/update-acct.service';
 
 @Component({
   selector: 'app-admin-nav',
@@ -25,13 +27,19 @@ export class AdminNavComponent implements OnInit{
     { path: '/logout', name: 'Logout', ic: 'power_settings_new', role: ['superAdmin', 'admin', 'encoder'] }
   ]
   public acctName: string;
+  private socket;
+  public isOpen: boolean = true;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private wsService: WebsocketService,
+    private updtAcct: UpdateAcctService) {
     router.events.pipe(
       withLatestFrom(this.isHandset$),
       filter(([a, b]) => b && a instanceof NavigationEnd)
@@ -51,11 +59,32 @@ export class AdminNavComponent implements OnInit{
     } else {
       this.acctName = token.fName + ' ' + token.lName
     }
+    this.wsService.listen('Item').subscribe((_) => {
+      // if(this.router.url == '/user/(^[a-z0-9]+$/i)') {
+      //
+      // }
+      let url = this.router.url.split('/')
+      if(url[url.length - 1] != 'notifications') {
+        this.isOpen = !this.isOpen;
+      }
+    })
+    this.openNotif()
   }
 
   getUserAccessLvl() {
     let token: any = jwtDecode(localStorage.getItem('gpAdmin'))
     return (token.type == 'superAdmin') ? 'Super Admin' : (token.type == 'admin') ? 'Admin' : 'Encoder'
+  }
+
+  openNotif() {
+    if(!this.isOpen) {
+      let token: any = jwtDecode(localStorage.getItem('gpAdmin'))
+      this.updtAcct.closeNotif(token).subscribe(res => {
+        if(res) {
+          this.isOpen = !this.isOpen
+        }
+      })
+    }
   }
 
 }

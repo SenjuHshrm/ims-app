@@ -27,6 +27,7 @@
     "@types/googlemaps": "^3.39.3",
     "@types/jwt-decode": "^2.2.1",
     "@types/lodash": "^4.14.136",
+    "@types/socket.io-client": "^1.4.33",
     "bn-ng-idle": "^1.0.1",
     "chart.js": "^2.9.3",
     "core-js": "^2.6.9",
@@ -40,6 +41,7 @@
     "moment": "^2.24.0",
     "ngx-facebook": "^2.4.0",
     "rxjs": "~6.3.3",
+    "socket.io-client": "^2.3.0",
     "tslib": "^1.9.0",
     "written-number": "^0.9.1",
     "zone.js": "~0.8.26"

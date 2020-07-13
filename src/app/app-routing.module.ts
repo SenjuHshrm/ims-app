@@ -22,6 +22,7 @@ import { AcctListComponent } from './server/acct-list/acct-list.component';
 import { CsGalleryComponent } from './client/cs-gallery/cs-gallery.component';
 import { LogoutComponent } from './server/logout/logout.component';
 import { AddPhotoComponent } from './server/add-photo/add-photo.component';
+import { SsNotifComponent } from './server/ss-notif/ss-notif.component';
 
 const routes: Routes = [
   { path: '', component: CsSiteLayoutComponent,
@@ -40,6 +41,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [CanActivateRouteGuard] },
       { path: 'dashboard', component: DashboardComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin'] } },
+      { path: 'notifications', component: SsNotifComponent, canActivate:[CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
       { path: 'items', component: SsItemsComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
       { path: 'sales', component: SsDailySalesComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },
       { path: 'sales/add', component: SsAddSalesComponent, canActivate: [CanActivateRouteGuard], data: { roles: ['superAdmin', 'admin', 'encoder'] } },

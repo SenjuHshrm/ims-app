@@ -60,23 +60,25 @@ export class SsAddSalesComponent implements OnInit {
 
   search(evt: MouseEvent, obj: any) {
     evt.defaultPrevented
-    this.searchItem.searchByName(this.name).subscribe(res => {
-      this.resp = res.res
-      itemLs = []
-      _.forEach(res.res, arr => {
-        itemLs.push({
-          id: arr._id,
-          name: arr.name,
-          img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
-          color: arr.color,
-          price: '₱ ' + arr.price,
-          itemCount: arr.itemCount,
-          availability: arr.isAvailable,
-          feature:  arr.featureToSite
+    if(this.name != '') {
+      this.searchItem.searchByName(this.name).subscribe(res => {
+        this.resp = res.res
+        itemLs = []
+        _.forEach(res.res, arr => {
+          itemLs.push({
+            id: arr._id,
+            name: arr.name,
+            img: 'data:image/png;jpg;jpeg;base64, ' + arr.img,
+            color: arr.color,
+            price: '₱ ' + arr.price,
+            itemCount: arr.itemCount,
+            availability: arr.isAvailable,
+            feature:  arr.featureToSite
+          })
         })
+        this.itemsLs = new MatTableDataSource(itemLs)
       })
-      this.itemsLs = new MatTableDataSource(itemLs)
-    })
+    }
   }
 
   add(obj: any) {

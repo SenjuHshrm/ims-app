@@ -38,7 +38,7 @@
     "jszip-utils": "0.0.2",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ngx-facebook": "^2.4.0",
     "rxjs": "~6.3.3",
     "socket.io-client": "^2.3.0",
